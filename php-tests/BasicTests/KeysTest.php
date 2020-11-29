@@ -37,6 +37,8 @@ class KeysTest extends CommonTestClass
     {
         $key = new Key\DirKey();
         $this->assertEquals('/var/cache/wwwcache/aaaaaaa', $key->fromSharedKey('aaaaaaa'));
-        $this->assertEquals('/var/cache/wwwcache/ear/a4vw-z.7v2!3#z', $key->fromSharedKey('ear/a4vw-z.7v2!3#z'));
+        $key::setDir('/var/other/');
+        $this->assertEquals('/var/other/ear/a4vw-z.7v2!3#z', $key->fromSharedKey('ear/a4vw-z.7v2!3#z'));
+        $key::setDir('/var/cache/wwwcache/');
     }
 }

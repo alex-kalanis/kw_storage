@@ -8,6 +8,13 @@ use kalanis\kw_storage\Interfaces\IKey;
 
 class DirKey implements IKey
 {
+    protected static $dir= '/var/cache/wwwcache/';
+
+    public static function setDir(string $dir): void
+    {
+        static::$dir = $dir;
+    }
+
     /**
      * @param string $key channel Id
      * @return string
@@ -15,6 +22,6 @@ class DirKey implements IKey
      */
     public function fromSharedKey(string $key): string
     {
-        return '/var/cache/wwwcache/' . $key;
+        return static::$dir . $key;
     }
 }
