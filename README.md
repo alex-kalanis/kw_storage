@@ -8,13 +8,7 @@ where it's necessary for store states of upload.
 ```
 {
     "require": {
-        "alex-kalanis/kw_storage": "dev-master"
-    },
-    "repositories": [
-        {
-            "type": "http",
-            "url":  "https://github.com/alex-kalanis/kw_storage.git"
-        }
+        "alex-kalanis/kw_storage": "1.0"
     }
 }
 ```

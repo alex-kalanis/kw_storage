@@ -6,21 +6,23 @@ namespace BasicTests;
 use CommonTestClass;
 use kalanis\kw_storage\Helper;
 use kalanis\kw_storage\Storage;
+use kalanis\kw_storage\StorageException;
 
 
 class CacheTest extends CommonTestClass
 {
     /**
-     * @expectedException \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testStorageUninitialized(): void
     {
         $storage = new Storage($this->getStorageFactory());
+        $this->expectException(StorageException::class);
         $storage->increment('abc');
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testStorageInitialized(): void
     {
@@ -31,7 +33,7 @@ class CacheTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testOperations(): void
     {
@@ -44,7 +46,7 @@ class CacheTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testLookup(): void
     {
@@ -53,7 +55,7 @@ class CacheTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileCounter(): void
     {
@@ -63,7 +65,7 @@ class CacheTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileHarderCounter(): void
     {

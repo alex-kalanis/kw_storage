@@ -6,12 +6,13 @@ namespace BasicTests;
 use CommonTestClass;
 use kalanis\kw_storage\Storage\Format;
 use kalanis\kw_storage\Storage\Target;
+use kalanis\kw_storage\StorageException;
 
 
 class FormatsTest extends CommonTestClass
 {
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testInit(): void
     {
@@ -20,7 +21,7 @@ class FormatsTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testRaw(): void
     {
@@ -32,7 +33,7 @@ class FormatsTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testSerialized(): void
     {
@@ -44,7 +45,7 @@ class FormatsTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testFormat(): void
     {

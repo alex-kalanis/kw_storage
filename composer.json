@@ -1,14 +1,18 @@
 {
     "name": "alex-kalanis/kw_storage",
     "description": "Universal storage library for store data as key-value pairs",
-    "keywords": [],
-    "license": "BSD 3-Clause",
-    "type": "project",
+    "keywords": [
+        "cache",
+        "volume",
+        "storage"
+    ],
+    "license": "BSD-3-Clause",
+    "type": "library",
     "require": {
         "php": ">=7.2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~7.2"
+        "phpunit/phpunit": ">=7.2"
     },
     "autoload": {
         "psr-4": {

@@ -5,6 +5,7 @@ namespace BasicTests;
 
 use CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
+use kalanis\kw_storage\StorageException;
 
 
 class StorageTest extends CommonTestClass
@@ -49,18 +50,19 @@ class StorageTest extends CommonTestClass
     }
 
     /**
-     * @expectedException \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileExists(): void
     {
         $volume = new Target\Volume();
         $this->assertTrue($volume->check($this->getTestDir()));
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->expectException(StorageException::class);
         $volume->load($this->mockTestFile());
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileOperations(): void
     {
@@ -74,7 +76,7 @@ class StorageTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileLookup(): void
     {
@@ -126,7 +128,7 @@ class StorageTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileSimpleCounter(): void
     {
@@ -142,7 +144,7 @@ class StorageTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileHarderCounter(): void
     {

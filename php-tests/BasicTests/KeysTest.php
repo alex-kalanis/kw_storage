@@ -6,12 +6,13 @@ namespace BasicTests;
 use CommonTestClass;
 use kalanis\kw_storage\Storage\Key;
 use kalanis\kw_storage\Storage\Target;
+use kalanis\kw_storage\StorageException;
 
 
 class KeysTest extends CommonTestClass
 {
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testInit(): void
     {
@@ -21,7 +22,7 @@ class KeysTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testDefaultKey(): void
     {
@@ -31,7 +32,7 @@ class KeysTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testDirKey(): void
     {

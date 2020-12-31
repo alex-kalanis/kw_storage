@@ -5,12 +5,13 @@ namespace BasicTests;
 
 use CommonTestClass;
 use kalanis\kw_storage\Storage;
+use kalanis\kw_storage\StorageException;
 
 
 class TargetTest extends CommonTestClass
 {
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testInit(): void
     {
@@ -27,7 +28,7 @@ class TargetTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileOperations(): void
     {
@@ -38,7 +39,7 @@ class TargetTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileLookup(): void
     {
@@ -47,7 +48,7 @@ class TargetTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileCounter(): void
     {
@@ -57,7 +58,7 @@ class TargetTest extends CommonTestClass
     }
 
     /**
-     * @throws \kalanis\kw_storage\StorageException
+     * @throws StorageException
      */
     public function testVolumeFileHarderCounter(): void
     {
