@@ -26,7 +26,7 @@ interface IStorage
      * @return string
      * @throws StorageException
      */
-    public function load(string $key): string;
+    public function load(string $key);
 
     /**
      * @param string $key

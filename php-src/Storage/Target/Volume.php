@@ -32,7 +32,7 @@ class Volume implements IStorage
         return is_file($key);
     }
 
-    public function load(string $key): string
+    public function load(string $key)
     {
         $content = @file_get_contents($key);
         if (false === $content) {

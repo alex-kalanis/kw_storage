@@ -30,7 +30,7 @@ class TargetMock implements \kalanis\kw_storage\Interfaces\IStorage
         return false;
     }
 
-    public function load(string $key): string
+    public function load(string $key)
     {
         return 'dummy mock';
     }

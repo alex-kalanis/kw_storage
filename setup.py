@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-from kw_templates import __version__ as version
+from kw_storage import __version__ as version
 
 with open("README.md", "r") as fh:
     long_desc = fh.read()
@@ -16,6 +16,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/alex-kalanis/kw_storage',
     install_require=[
+        'phpserialize',
     ],
     packages=find_packages(),
     classifiers=[
