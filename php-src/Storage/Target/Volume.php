@@ -17,7 +17,7 @@ class Volume implements IStorage
     public function check(string $key): bool
     {
         $sepPos = strrpos($key, DIRECTORY_SEPARATOR);
-        $path = substr($key, 0, false == $sepPos ? null : intval($sepPos));
+        $path = false === $sepPos ? substr($key, 0) : substr($key, 0, intval($sepPos));
         if (!is_dir($path)) {
             if (file_exists($path)) {
                 unlink($path);
