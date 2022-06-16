@@ -5,7 +5,6 @@ namespace kalanis\kw_storage\Storage;
 
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Interfaces;
-use Traversable;
 
 
 /**
@@ -86,10 +85,10 @@ class Storage
     /**
      * What data is in storage?
      * @param string $mask
-     * @return Traversable
+     * @return string[]
      * @throws StorageException
      */
-    public function lookup(string $mask): Traversable
+    public function lookup(string $mask): iterable
     {
         return $this->storage->lookup($this->key->fromSharedKey($mask));
     }
@@ -119,7 +118,7 @@ class Storage
     /**
      * Remove multiple keys
      * @param string[] $keys
-     * @return string[]
+     * @return array<int|string, bool>
      * @throws StorageException
      */
     public function removeMulti(array $keys): array
@@ -127,7 +126,7 @@ class Storage
         return $this->storage->removeMulti(array_map([$this, 'multiKey'], $keys));
     }
 
-    protected function multiKey(string $key)
+    protected function multiKey(string $key): string
     {
         return $this->key->fromSharedKey($key);
     }

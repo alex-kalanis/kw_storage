@@ -22,7 +22,7 @@ interface IFormat
 
     /**
      * @param mixed $data usually primitives like string or int
-     * @return mixed restored content
+     * @return mixed stored content
      * @throws StorageException
      */
     public function encode($data);

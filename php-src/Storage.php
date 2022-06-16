@@ -3,9 +3,6 @@
 namespace kalanis\kw_storage;
 
 
-use Traversable;
-
-
 /**
  * Class Storage
  * @package kalanis\kw_storage
@@ -24,9 +21,9 @@ class Storage
     }
 
     /**
-     * @param Interfaces\IStorage|array|string|null $storageParams
+     * @param mixed|Interfaces\IStorage|array|string|null $storageParams
      */
-    public function init($storageParams)
+    public function init($storageParams): void
     {
         $this->storage = $this->storageFactory->getStorage($storageParams);
     }
@@ -114,10 +111,10 @@ class Storage
 
     /**
      * Return all active storage keys
-     * @return Traversable for foreach()
+     * @return string[]
      * @throws StorageException
      */
-    public function getAllKeys(): Traversable
+    public function getAllKeys(): iterable
     {
         $this->checkStorage();
         return $this->storage->lookup('');
@@ -138,7 +135,7 @@ class Storage
     /**
      * Delete multiple keys from storage
      * @param string[] $keys
-     * @return string[]
+     * @return array<int|string, bool>
      * @throws StorageException
      */
     public function deleteMulti(array $keys)

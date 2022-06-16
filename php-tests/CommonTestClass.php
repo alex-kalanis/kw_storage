@@ -45,7 +45,7 @@ class TargetMock implements \kalanis\kw_storage\Interfaces\IStorage
         return false;
     }
 
-    public function lookup(string $key): Traversable
+    public function lookup(string $key): iterable
     {
         yield from [];
     }

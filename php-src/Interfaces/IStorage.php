@@ -30,7 +30,7 @@ interface IStorage
 
     /**
      * @param string $key
-     * @param string $data
+     * @param mixed $data
      * @param int|null $timeout
      * @return bool
      * @throws StorageException
@@ -47,10 +47,10 @@ interface IStorage
     /**
      * Lookup through keys in storage
      * @param string $key
-     * @return Traversable
+     * @return string[]
      * @throws StorageException
      */
-    public function lookup(string $key): Traversable;
+    public function lookup(string $key): iterable;
 
     /**
      * Increment index in key
@@ -71,7 +71,7 @@ interface IStorage
     /**
      * Remove multiple keys
      * @param string[] $keys
-     * @return string[]
+     * @return array<int|string, bool>
      * @throws StorageException
      */
     public function removeMulti(array $keys): array;
