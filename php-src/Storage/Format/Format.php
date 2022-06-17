@@ -40,6 +40,6 @@ class Format implements IFormat
         if (is_string($data)) {
             return $data;
         }
-        return (string)json_encode($data);
+        return strval(json_encode($data));
     }
 }

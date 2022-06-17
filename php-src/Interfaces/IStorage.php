@@ -23,8 +23,8 @@ interface IStorage
 
     /**
      * @param string $key
-     * @return string
      * @throws StorageException
+     * @return string
      */
     public function load(string $key);
 
@@ -32,47 +32,47 @@ interface IStorage
      * @param string $key
      * @param mixed $data
      * @param int|null $timeout
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function save(string $key, $data, ?int $timeout = null): bool;
 
     /**
      * @param string $key
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function remove(string $key): bool;
 
     /**
      * Lookup through keys in storage
      * @param string $key
-     * @return string[]
      * @throws StorageException
+     * @return string[]
      */
     public function lookup(string $key): iterable;
 
     /**
      * Increment index in key
      * @param string $key
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function increment(string $key): bool;
 
     /**
      * Decrement index in key
      * @param string $key
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function decrement(string $key): bool;
 
     /**
      * Remove multiple keys
      * @param string[] $keys
-     * @return array<int|string, bool>
      * @throws StorageException
+     * @return array<int|string, bool>
      */
     public function removeMulti(array $keys): array;
 }

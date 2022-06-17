@@ -42,8 +42,8 @@ class Storage
      * @param string $sharedKey
      * @param mixed $data
      * @param int|null $timeout
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function write(string $sharedKey, $data, ?int $timeout = null): bool
     {
@@ -53,8 +53,8 @@ class Storage
     /**
      * Read storage record
      * @param string $sharedKey
-     * @return mixed
      * @throws StorageException
+     * @return mixed
      */
     public function read(string $sharedKey)
     {
@@ -64,8 +64,8 @@ class Storage
     /**
      * Delete storage record - usually on finish or discard
      * @param string $sharedKey
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function remove(string $sharedKey): bool
     {
@@ -85,8 +85,8 @@ class Storage
     /**
      * What data is in storage?
      * @param string $mask
-     * @return string[]
      * @throws StorageException
+     * @return string[]
      */
     public function lookup(string $mask): iterable
     {
@@ -96,8 +96,8 @@ class Storage
     /**
      * Increment index in key
      * @param string $key
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function increment(string $key): bool
     {
@@ -107,8 +107,8 @@ class Storage
     /**
      * Decrement index in key
      * @param string $key
-     * @return bool
      * @throws StorageException
+     * @return bool
      */
     public function decrement(string $key): bool
     {
@@ -118,8 +118,8 @@ class Storage
     /**
      * Remove multiple keys
      * @param string[] $keys
-     * @return array<int|string, bool>
      * @throws StorageException
+     * @return array<int|string, bool>
      */
     public function removeMulti(array $keys): array
     {
