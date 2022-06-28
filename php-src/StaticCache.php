@@ -35,7 +35,7 @@ class StaticCache
             static::checkStorage();
             return static::$storage->get($key);
         } catch (StorageException $ex) {
-            return [];
+            return null;
         }
     }
 

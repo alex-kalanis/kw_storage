@@ -3,8 +3,10 @@
 namespace kalanis\kw_storage\Storage\Target;
 
 
+use kalanis\kw_storage\Interfaces\IPassDirs;
 use kalanis\kw_storage\Interfaces\IStorage;
 use kalanis\kw_storage\StorageException;
+use Traversable;
 
 
 /**
@@ -12,12 +14,14 @@ use kalanis\kw_storage\StorageException;
  * @package kalanis\kw_storage\Storage\Target
  * Store content onto volume
  */
-class Volume implements IStorage
+class Volume implements IStorage, IPassDirs
 {
+    use TOperations;
+
     public function check(string $key): bool
     {
-        $sepPos = strrpos($key, DIRECTORY_SEPARATOR);
-        $path = false === $sepPos ? substr($key, 0) : substr($key, 0, intval($sepPos));
+        $sepPos = mb_strrpos($key, DIRECTORY_SEPARATOR);
+        $path = (false === $sepPos) ? substr($key, 0) : substr($key, 0, intval($sepPos));
         if (!is_dir($path)) {
             if (file_exists($path)) {
                 unlink($path);
@@ -29,7 +33,12 @@ class Volume implements IStorage
 
     public function exists(string $key): bool
     {
-        return is_file($key);
+        return file_exists($key);
+    }
+
+    public function isDir(string $key): bool
+    {
+        return is_dir($key);
     }
 
     public function load(string $key)
@@ -51,18 +60,16 @@ class Volume implements IStorage
         return @unlink($key);
     }
 
-    public function lookup(string $key): iterable
+    public function lookup(string $path): Traversable
     {
-        $path = realpath($key);
-        if (false === $path) {
+        $real = realpath($path);
+        if (false === $real) {
             return;
         }
-        $files = scandir($path);
+        $files = scandir($real);
         if (!empty($files)) {
             foreach ($files as $file) {
-                if (is_file($key . $file)) {
-                    yield $file;
-                }
+                yield $file;
             }
         }
     }
@@ -89,14 +96,5 @@ class Volume implements IStorage
         }
         $this->remove($key); // hanging pointers
         return $this->save($key, $number);
-    }
-
-    public function removeMulti(array $keys): array
-    {
-        $result = [];
-        foreach ($keys as $index => $key) {
-            $result[$index] = $this->remove($key);
-        }
-        return $result;
     }
 }

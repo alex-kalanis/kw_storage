@@ -116,8 +116,19 @@ class Storage
      */
     public function getAllKeys(): iterable
     {
+        return $this->getMaskedKeys('');
+    }
+
+    /**
+     * Return storage keys with mask
+     * @param string $mask
+     * @throws StorageException
+     * @return string[]
+     */
+    public function getMaskedKeys(string $mask): iterable
+    {
         $this->checkStorage();
-        return $this->storage->lookup('');
+        return $this->storage->lookup($mask);
     }
 
     /**

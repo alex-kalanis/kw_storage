@@ -1,6 +1,6 @@
 <?php
 
-namespace BasicTests;
+namespace StorageTests;
 
 
 use CommonTestClass;
@@ -8,7 +8,7 @@ use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
 
 
-class StorageTest extends CommonTestClass
+class VolumeTest extends CommonTestClass
 {
     public function tearDown(): void
     {
@@ -21,25 +21,13 @@ class StorageTest extends CommonTestClass
         parent::tearDown();
     }
 
-    public function testInit(): void
-    {
-        $factory = new Target\Factory();
-        $this->assertInstanceOf('\TargetMock', $factory->getStorage(new \TargetMock()));
-        $this->assertEmpty($factory->getStorage([]));
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Target\Volume', $factory->getStorage(['storage' => 'volume']));
-        $this->assertEmpty($factory->getStorage(['storage' => 'none']));
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Target\Volume', $factory->getStorage('volume'));
-        $this->assertEmpty($factory->getStorage('none'));
-        $this->assertEmpty($factory->getStorage('what'));
-        $this->assertEmpty($factory->getStorage(null));
-    }
-
-    public function testVolumeDir(): void
+    public function testDir(): void
     {
         $volume = new Target\Volume();
 
         // test dir
         $testDir = $this->getTestDir();
+        $this->assertTrue($volume->isDir($testDir));
         $mockPath = substr($testDir, 0, strrpos($testDir, DIRECTORY_SEPARATOR)) . 'dummy';
         if (is_dir($mockPath)) {
             rmdir($mockPath);
@@ -52,11 +40,12 @@ class StorageTest extends CommonTestClass
     /**
      * @throws StorageException
      */
-    public function testVolumeFileExists(): void
+    public function testExists(): void
     {
         $volume = new Target\Volume();
         $this->assertTrue($volume->check($this->getTestDir()));
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->expectException(StorageException::class);
         $volume->load($this->mockTestFile());
     }
@@ -64,21 +53,24 @@ class StorageTest extends CommonTestClass
     /**
      * @throws StorageException
      */
-    public function testVolumeFileOperations(): void
+    public function testOperations(): void
     {
         $volume = new Target\Volume();
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->assertTrue($volume->save($this->mockTestFile(), 'asdfghjklpoiuztrewqyxcvbnm'));
         $this->assertTrue($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->assertEquals('asdfghjklpoiuztrewqyxcvbnm', $volume->load($this->mockTestFile()));
         $this->assertTrue($volume->remove($this->mockTestFile()));
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isDir($this->mockTestFile()));
     }
 
     /**
      * @throws StorageException
      */
-    public function testVolumeFileLookup(): void
+    public function testLookup(): void
     {
         $volume = new Target\Volume();
         $this->assertTrue($volume->check($this->getTestDir()));
@@ -97,7 +89,7 @@ class StorageTest extends CommonTestClass
         ], $removal);
 
         iterator_to_array($volume->lookup('this path does not exists'));
-        $this->assertEquals(0, count(iterator_to_array($volume->lookup($this->getTestDir()))));
+        $this->assertEquals(0, count(array_filter(iterator_to_array($volume->lookup($this->getTestDir())), [$this, 'dotDirs'])));
 
         file_put_contents($this->getTestDir() . 'dummyFile.tst', 'asdfghjklqwertzuiopyxcvbnm');
         file_put_contents($this->getTestDir() . 'dummyFile.0.tst', 'asdfghjklqwertzuiopyxcvbnm');
@@ -106,6 +98,7 @@ class StorageTest extends CommonTestClass
 
         $files = iterator_to_array($volume->lookup($this->getTestDir()));
         sort($files);
+        $files = array_filter($files, [$this, 'dotDirs']);
 
         $this->assertEquals(count($testFiles), count($files));
         $this->assertEquals('dummyFile.0.tst', reset($files));
@@ -127,10 +120,15 @@ class StorageTest extends CommonTestClass
         ], $removal);
     }
 
+    public function dotDirs(string $path): bool
+    {
+        return !in_array($path, ['.', '..']);
+    }
+
     /**
      * @throws StorageException
      */
-    public function testVolumeFileSimpleCounter(): void
+    public function testSimpleCounter(): void
     {
         $volume = new Target\Volume();
         $this->assertFalse($volume->exists($this->mockTestFile()));
@@ -146,7 +144,7 @@ class StorageTest extends CommonTestClass
     /**
      * @throws StorageException
      */
-    public function testVolumeFileHarderCounter(): void
+    public function testHarderCounter(): void
     {
         $volume = new Target\Volume();
         $this->assertFalse($volume->exists($this->mockTestFile()));
