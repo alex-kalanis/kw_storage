@@ -3,6 +3,8 @@
 namespace kalanis\kw_storage;
 
 
+use Traversable;
+
 /**
  * Class Storage
  * @package kalanis\kw_storage
@@ -112,9 +114,9 @@ class Storage
     /**
      * Return all active storage keys
      * @throws StorageException
-     * @return string[]
+     * @return Traversable<string>
      */
-    public function getAllKeys(): iterable
+    public function getAllKeys(): Traversable
     {
         return $this->getMaskedKeys('');
     }
@@ -123,9 +125,9 @@ class Storage
      * Return storage keys with mask
      * @param string $mask
      * @throws StorageException
-     * @return string[]
+     * @return Traversable<string>
      */
-    public function getMaskedKeys(string $mask): iterable
+    public function getMaskedKeys(string $mask): Traversable
     {
         $this->checkStorage();
         return $this->storage->lookup($mask);

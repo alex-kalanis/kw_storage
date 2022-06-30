@@ -11,7 +11,7 @@
 Simple system for accessing key-value storages. Original is part of UploadPerPartes,
 where it's necessary for store states of upload.
 
-# PHP Installation
+## PHP Installation
 
 ```
 {
@@ -24,8 +24,13 @@ where it's necessary for store states of upload.
 (Refer to [Composer Documentation](https://github.com/composer/composer/blob/master/doc/00-intro.md#introduction) if you are not
 familiar with composer)
 
+## Changelog
 
-# PHP Usage
+* 2.0 - Remove format and cache support (that should not be a problem of storage); added stream variant support
+* 1.0 - Initial version, with basics
+
+
+## PHP Usage
 
 1.) Use your autoloader (if not already done via Composer autoloader)
 
@@ -37,7 +42,7 @@ familiar with composer)
 
 5.) Just use inside your app.
 
-# Python Installation
+## Python Installation
 
 into your "setup.py":
 
@@ -47,7 +52,7 @@ into your "setup.py":
     ]
 ```
 
-# Python Usage
+## Python Usage
 
 1.) Connect the "kw_storage.storage" into your app. When it came necessary
 you can extends every library to comply your use-case, mainly format of storage.

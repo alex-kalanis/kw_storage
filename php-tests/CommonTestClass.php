@@ -85,15 +85,6 @@ class MockKeyFactory extends Storage\Key\Factory
 }
 
 
-class MockFormatFactory extends Storage\Format\Factory
-{
-    public function getFormat(Interfaces\IStorage $storage): Interfaces\IFormat
-    {
-        return new Storage\Format\Raw();
-    }
-}
-
-
 class MockTargetFactory extends Storage\Target\Factory
 {
     public function getStorage($params): Interfaces\IStorage

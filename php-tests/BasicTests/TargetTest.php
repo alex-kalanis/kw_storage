@@ -10,12 +10,9 @@ use kalanis\kw_storage\StorageException;
 
 class TargetTest extends CommonTestClass
 {
-    /**
-     * @throws StorageException
-     */
     public function testInit(): void
     {
-        $factory = new Storage\Factory(new Storage\Target\Factory(), new \MockFormatFactory(), new \MockKeyFactory());
+        $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
         $this->assertEmpty($factory->getStorage('none'));
     }
 
@@ -73,6 +70,6 @@ class TargetTest extends CommonTestClass
 
     protected function getStorageFactory(): Storage\Factory
     {
-        return new Storage\Factory(new \MockTargetFactory(), new \MockFormatFactory(), new \MockKeyFactory());
+        return new Storage\Factory(new \MockKeyFactory(), new \MockTargetFactory());
     }
 }

@@ -9,7 +9,7 @@ use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
 
 
-class CacheTest extends CommonTestClass
+class StorageTest extends CommonTestClass
 {
     /**
      * @throws StorageException
@@ -26,7 +26,7 @@ class CacheTest extends CommonTestClass
      */
     public function testStorageInitialized(): void
     {
-        Helper::initIntoStatic();
+        Helper::initStorage();
         $volume = $this->getStorageVolume();
         $this->assertTrue($volume->isConnected());
         $this->assertFalse($volume->exists('utz'));
@@ -82,6 +82,6 @@ class CacheTest extends CommonTestClass
 
     protected function getStorageFactory(): Storage\Factory
     {
-        return new Storage\Factory(new \MockTargetFactory(), new \MockFormatFactory(), new \MockKeyFactory());
+        return new Storage\Factory(new \MockKeyFactory(), new \MockTargetFactory());
     }
 }
