@@ -7,6 +7,11 @@ use kalanis\kw_storage\StorageException;
 use Traversable;
 
 
+/**
+ * Interface IStorage
+ * @package kalanis\kw_storage\Interfaces
+ * Basic operations over every storage
+ */
 interface IStorage
 {
     /**

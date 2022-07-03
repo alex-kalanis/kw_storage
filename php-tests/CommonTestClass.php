@@ -8,7 +8,7 @@ class CommonTestClass extends \PHPUnit\Framework\TestCase
 {
     protected function getTestDir(): string
     {
-        return implode(DIRECTORY_SEPARATOR, [__DIR__, 'tmp']) . DIRECTORY_SEPARATOR;
+        return implode(DIRECTORY_SEPARATOR, [__DIR__, 'tmp', '']);
     }
 
     protected function mockTestFile(): string

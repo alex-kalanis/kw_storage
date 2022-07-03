@@ -16,7 +16,7 @@ where it's necessary for store states of upload.
 ```
 {
     "require": {
-        "alex-kalanis/kw_storage": "1.0"
+        "alex-kalanis/kw_storage": "2.0"
     }
 }
 ```
@@ -24,10 +24,13 @@ where it's necessary for store states of upload.
 (Refer to [Composer Documentation](https://github.com/composer/composer/blob/master/doc/00-intro.md#introduction) if you are not
 familiar with composer)
 
-## Changelog
+## Changes
 
-* 2.0 - Remove format and cache support (that should not be a problem of storage); added stream variant support
-* 1.0 - Initial version, with basics
+* 2.0 - Redefine Key-Value storing
+  * Remove formats and cache support (that should not be a problem of storage)
+  * Added stream variant support
+  * Added interface for catching content with sub-content (so directories) on storage-level
+* 1.0 - Initial version, with basics and cache support
 
 
 ## PHP Usage
@@ -36,7 +39,7 @@ familiar with composer)
 
 2.) Add some external packages with connection to the local or remote services.
 
-3.) Connect the "kalanis\kw_storage\Storage" or "kalanis\kw_storage\StaticCache" into your app. Extends it for setting your case.
+3.) Connect the "kalanis\kw_storage\Storage" or "kalanis\kw_storage\Helper" into your app. Extends it for setting your case, especially dirs.
 
 4.) Extend your libraries by interfaces inside the package.
 

@@ -3,6 +3,7 @@
 namespace kalanis\kw_storage\Storage\Target;
 
 
+use kalanis\kw_storage\Extras\TRemoveCycle;
 use kalanis\kw_storage\Interfaces\IPassDirs;
 use kalanis\kw_storage\Interfaces\IStorage;
 use kalanis\kw_storage\StorageException;
@@ -17,6 +18,7 @@ use Traversable;
 class Volume implements IStorage, IPassDirs
 {
     use TOperations;
+    use TRemoveCycle;
 
     public function check(string $key): bool
     {
@@ -39,6 +41,16 @@ class Volume implements IStorage, IPassDirs
     public function isDir(string $key): bool
     {
         return is_dir($key);
+    }
+
+    public function mkDir(string $key, bool $recursive = false): bool
+    {
+        return mkdir($key, 0777, $recursive);
+    }
+
+    public function rmDir(string $key, bool $recursive = false): bool
+    {
+        return $recursive ? $this->removeCycle($key) && rmdir($key) : rmdir($key);
     }
 
     public function load(string $key)

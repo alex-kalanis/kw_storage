@@ -86,7 +86,7 @@ class Storage
      * @throws StorageException
      * @return Traversable<string>
      */
-    public function lookup(string $mask): iterable
+    public function lookup(string $mask): Traversable
     {
         return $this->storage->lookup($this->key->fromSharedKey($mask));
     }

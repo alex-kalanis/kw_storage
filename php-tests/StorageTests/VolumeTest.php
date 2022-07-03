@@ -18,6 +18,9 @@ class VolumeTest extends CommonTestClass
         if (is_dir($this->mockTestFile())) {
             rmdir($this->mockTestFile());
         }
+        if (is_dir($this->getTestDir() . 'some')) {
+            rmdir($this->getTestDir() . 'some');
+        }
         parent::tearDown();
     }
 
@@ -65,6 +68,21 @@ class VolumeTest extends CommonTestClass
         $this->assertTrue($volume->remove($this->mockTestFile()));
         $this->assertFalse($volume->exists($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
+    }
+
+    /**
+     * @throws StorageException
+     */
+    public function testDirsRecursive(): void
+    {
+        $volume = new Target\Volume();
+        $this->assertTrue($volume->mkDir($this->getTestDir() . implode(DIRECTORY_SEPARATOR, ['some', 'none', 'hoo']), true));
+        $this->assertTrue($volume->exists($this->getTestDir() . 'some'));
+        $this->assertFalse($volume->exists($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'hint.none'));
+        $this->assertTrue($volume->save($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'hint.none', 'asdfghjklpoiuztrewqyxcvbnm'));
+        $this->assertTrue($volume->rmDir($this->getTestDir() . 'some', true));
+        $this->assertFalse($volume->isDir($this->getTestDir() . 'some'));
+        $this->assertFalse($volume->exists($this->getTestDir() . 'some'));
     }
 
     /**
