@@ -6,12 +6,12 @@ with open("README.md", "r") as fh:
     long_desc = fh.read()
 
 setup(
-    name='kw_templates',
+    name='kw_storage',
     version=version,
     license='BSD',
     author='Petr Plsek',
     author_email='me@kalanys.com',
-    description='Basic template system for KWCMS',
+    description='Universal storage library for store data as key-value pairs',
     long_description=long_desc,
     long_description_content_type='text/markdown',
     url='https://github.com/alex-kalanis/kw_storage',

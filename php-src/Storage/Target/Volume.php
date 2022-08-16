@@ -4,6 +4,7 @@ namespace kalanis\kw_storage\Storage\Target;
 
 
 use kalanis\kw_storage\Extras\TRemoveCycle;
+use kalanis\kw_storage\Extras\TVolumeCopy;
 use kalanis\kw_storage\Interfaces\IPassDirs;
 use kalanis\kw_storage\Interfaces\IStorage;
 use kalanis\kw_storage\StorageException;
@@ -19,6 +20,7 @@ class Volume implements IStorage, IPassDirs
 {
     use TOperations;
     use TRemoveCycle;
+    use TVolumeCopy;
 
     public function check(string $key): bool
     {
@@ -41,6 +43,11 @@ class Volume implements IStorage, IPassDirs
     public function isDir(string $key): bool
     {
         return is_dir($key);
+    }
+
+    public function isFile(string $key): bool
+    {
+        return is_file($key);
     }
 
     public function mkDir(string $key, bool $recursive = false): bool
@@ -67,9 +74,31 @@ class Volume implements IStorage, IPassDirs
         return (false !== @file_put_contents($key, strval($data)));
     }
 
+    public function copy(string $source, string $dest): bool
+    {
+        return $this->xcopy($source, $dest);
+    }
+
+    public function move(string $source, string $dest): bool
+    {
+        return @rename($source, $dest);
+    }
+
     public function remove(string $key): bool
     {
         return @unlink($key);
+    }
+
+    public function size(string $key): ?int
+    {
+        $size = @filesize($key);
+        return (false === $size) ? null : $size;
+    }
+
+    public function created(string $key): ?int
+    {
+        $created = @filemtime($key);
+        return (false === $created) ? null : $created;
     }
 
     public function lookup(string $path): Traversable

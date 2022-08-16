@@ -15,6 +15,18 @@ class VolumeTest extends CommonTestClass
         if (is_file($this->mockTestFile())) {
             unlink($this->mockTestFile());
         }
+        if (is_file($this->mockTestFile('2'))) {
+            unlink($this->mockTestFile('2'));
+        }
+        if (is_file($this->mockTestFile('3'))) {
+            unlink($this->mockTestFile('3'));
+        }
+        if (is_file($this->mockTestFile('4'))) {
+            unlink($this->mockTestFile('4'));
+        }
+        if (is_file($this->mockTestFile('5'))) {
+            unlink($this->mockTestFile('5'));
+        }
         if (is_dir($this->mockTestFile())) {
             rmdir($this->mockTestFile());
         }
@@ -64,10 +76,26 @@ class VolumeTest extends CommonTestClass
         $this->assertTrue($volume->save($this->mockTestFile(), 'asdfghjklpoiuztrewqyxcvbnm'));
         $this->assertTrue($volume->exists($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
+        $this->assertTrue($volume->isFile($this->mockTestFile()));
+        $this->assertEquals(26, $volume->size($this->mockTestFile()));
+        $created = $volume->created($this->mockTestFile());
+        $now = time();
+        $this->assertTrue($created > $now - 10);
+        $this->assertTrue($created < $now + 10);
         $this->assertEquals('asdfghjklpoiuztrewqyxcvbnm', $volume->load($this->mockTestFile()));
-        $this->assertTrue($volume->remove($this->mockTestFile()));
+        $this->assertTrue($volume->copy($this->mockTestFile(), $this->mockTestFile('2')));
+        $this->assertTrue($volume->move($this->mockTestFile(), $this->mockTestFile('3')));
+        $this->assertFalse($volume->copy($this->mockTestFile(), $this->mockTestFile('4')));
+        $this->assertFalse($volume->move($this->mockTestFile(), $this->mockTestFile('5')));
+        $this->assertFalse($volume->remove($this->mockTestFile()));
+        $this->assertTrue($volume->remove($this->mockTestFile('2')));
+        $this->assertTrue($volume->remove($this->mockTestFile('3')));
+        $this->assertFalse($volume->remove($this->mockTestFile('4')));
+        $this->assertFalse($volume->remove($this->mockTestFile('5')));
         $this->assertFalse($volume->exists($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
+        $this->assertNull($volume->size($this->mockTestFile()));
+        $this->assertNull($volume->created($this->mockTestFile()));
     }
 
     /**

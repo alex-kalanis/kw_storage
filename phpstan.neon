@@ -13,3 +13,5 @@ parameters:
 	ignoreErrors:
 		# solved by unit tests
 		- '#Cannot call method [a-zA-Z0-9\\_]+\(\) on kalanis\\kw_storage\\Storage#'
+		- '#Cannot call method read\(\) on Directory\|false.#'
+		- '#Cannot call method close\(\) on Directory\|false.#'

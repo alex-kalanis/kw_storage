@@ -11,9 +11,9 @@ class CommonTestClass extends \PHPUnit\Framework\TestCase
         return implode(DIRECTORY_SEPARATOR, [__DIR__, 'tmp', '']);
     }
 
-    protected function mockTestFile(): string
+    protected function mockTestFile(string $pos = ''): string
     {
-        return $this->getTestDir() . 'testingFile.txt';
+        return $this->getTestDir() . 'testingFile' . $pos . '.txt';
     }
 }
 
