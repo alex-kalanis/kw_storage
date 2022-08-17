@@ -135,7 +135,7 @@ class VolumeTest extends CommonTestClass
         ], $removal);
 
         iterator_to_array($volume->lookup('this path does not exists'));
-        $this->assertEquals(0, count(array_filter(iterator_to_array($volume->lookup($this->getTestDir())), [$this, 'dotDirs'])));
+        $this->assertEquals(1, count(array_filter(iterator_to_array($volume->lookup($this->getTestDir())), [$this, 'dotDirs'])));
 
         file_put_contents($this->getTestDir() . 'dummyFile.tst', 'asdfghjklqwertzuiopyxcvbnm');
         file_put_contents($this->getTestDir() . 'dummyFile.0.tst', 'asdfghjklqwertzuiopyxcvbnm');
@@ -146,8 +146,9 @@ class VolumeTest extends CommonTestClass
         sort($files);
         $files = array_filter($files, [$this, 'dotDirs']);
 
-        $this->assertEquals(count($testFiles), count($files));
-        $this->assertEquals('dummyFile.0.tst', reset($files));
+        $this->assertEquals(count($testFiles) + 1, count($files)); // because gitkeep
+        $this->assertEquals('.gitkeep', reset($files));
+        $this->assertEquals('dummyFile.0.tst', next($files));
         $this->assertEquals('dummyFile.1.tst', next($files));
         $this->assertEquals('dummyFile.2.tst', next($files));
         $this->assertEquals('dummyFile.tst', next($files));
