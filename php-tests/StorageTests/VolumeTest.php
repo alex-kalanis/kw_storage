@@ -12,27 +12,13 @@ class VolumeTest extends CommonTestClass
 {
     public function tearDown(): void
     {
-        if (is_file($this->mockTestFile())) {
-            unlink($this->mockTestFile());
-        }
-        if (is_file($this->mockTestFile('2'))) {
-            unlink($this->mockTestFile('2'));
-        }
-        if (is_file($this->mockTestFile('3'))) {
-            unlink($this->mockTestFile('3'));
-        }
-        if (is_file($this->mockTestFile('4'))) {
-            unlink($this->mockTestFile('4'));
-        }
-        if (is_file($this->mockTestFile('5'))) {
-            unlink($this->mockTestFile('5'));
-        }
-        if (is_dir($this->mockTestFile())) {
-            rmdir($this->mockTestFile());
-        }
-        if (is_dir($this->getTestDir() . 'some')) {
-            rmdir($this->getTestDir() . 'some');
-        }
+        $this->rmFile($this->mockTestFile('', false));
+        $this->rmFile($this->mockTestFile('2', false));
+        $this->rmFile($this->mockTestFile('3', false));
+        $this->rmFile($this->mockTestFile('4', false));
+        $this->rmFile($this->mockTestFile('5', false));
+        $this->rmDir($this->mockTestFile('', false));
+        $this->rmDir('some');
         parent::tearDown();
     }
 

@@ -12,12 +12,8 @@ class MemoryTest extends CommonTestClass
 {
     public function tearDown(): void
     {
-        if (is_file($this->mockTestFile())) {
-            unlink($this->mockTestFile());
-        }
-        if (is_dir($this->mockTestFile())) {
-            rmdir($this->mockTestFile());
-        }
+        $this->rmFile($this->mockTestFile('', false));
+        $this->rmDir($this->mockTestFile('', false));
         parent::tearDown();
     }
 

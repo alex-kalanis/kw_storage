@@ -22,37 +22,17 @@ class VolumeCopyTest extends CommonTestClass
     public function tearDown(): void
     {
         // copy
-        if (is_file($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'tst1')) {
-            unlink($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'tst1');
-        }
-        if (is_file($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2')) {
-            unlink($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2');
-        }
-        if (is_file($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3')) {
-            unlink($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3');
-        }
-        if (is_dir($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any')) {
-            rmdir($this->getTestDir() . 'other' . DIRECTORY_SEPARATOR . 'any');
-        }
-        if (is_dir($this->getTestDir() . 'other')) {
-            rmdir($this->getTestDir() . 'other');
-        }
+        $this->rmFile('other' . DIRECTORY_SEPARATOR . 'tst1');
+        $this->rmFile('other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2');
+        $this->rmFile('other' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3');
+        $this->rmDir('other' . DIRECTORY_SEPARATOR . 'any');
+        $this->rmDir('other');
         // original
-        if (is_file($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'tst1')) {
-            unlink($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'tst1');
-        }
-        if (is_file($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2')) {
-            unlink($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2');
-        }
-        if (is_file($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3')) {
-            unlink($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3');
-        }
-        if (is_dir($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any')) {
-            rmdir($this->getTestDir() . 'some' . DIRECTORY_SEPARATOR . 'any');
-        }
-        if (is_dir($this->getTestDir() . 'some')) {
-            rmdir($this->getTestDir() . 'some');
-        }
+        $this->rmFile('some' . DIRECTORY_SEPARATOR . 'tst1');
+        $this->rmFile('some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst2');
+        $this->rmFile('some' . DIRECTORY_SEPARATOR . 'any' . DIRECTORY_SEPARATOR . 'tst3');
+        $this->rmDir('some' . DIRECTORY_SEPARATOR . 'any');
+        $this->rmDir('some');
         parent::tearDown();
     }
 
