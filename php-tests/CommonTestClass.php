@@ -32,7 +32,7 @@ class CommonTestClass extends \PHPUnit\Framework\TestCase
 }
 
 
-class TargetMock implements \kalanis\kw_storage\Interfaces\IStorage
+class TargetMock implements \kalanis\kw_storage\Interfaces\ITarget
 {
     public function check(string $key): bool
     {
@@ -92,7 +92,7 @@ class MockKey implements \kalanis\kw_storage\Interfaces\IKey
 
 class MockKeyFactory extends Storage\Key\Factory
 {
-    public function getKey(Interfaces\IStorage $storage): Interfaces\IKey
+    public function getKey(Interfaces\ITarget $storage): Interfaces\IKey
     {
         return new MockKey();
     }
@@ -101,7 +101,7 @@ class MockKeyFactory extends Storage\Key\Factory
 
 class MockTargetFactory extends Storage\Target\Factory
 {
-    public function getStorage($params): Interfaces\IStorage
+    public function getStorage($params): Interfaces\ITarget
     {
         return new \TargetMock();
     }

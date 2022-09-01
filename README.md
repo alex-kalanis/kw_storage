@@ -16,7 +16,7 @@ where it's necessary for store states of upload.
 ```
 {
     "require": {
-        "alex-kalanis/kw_storage": "2.0"
+        "alex-kalanis/kw_storage": "3.0"
     }
 }
 ```
@@ -26,7 +26,8 @@ familiar with composer)
 
 ## Changes
 
-* 2.0 - Redefine Key-Value storing
+* 3.0 - Redefine interfaces for targets
+* 2.0 - Redefine Key-Value storing data
   * Remove formats and cache support (that should not be a problem of storage)
   * Added stream variant support
   * Added interface for catching content with sub-content (so directories) on storage-level
