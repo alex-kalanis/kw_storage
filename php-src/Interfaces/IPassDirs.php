@@ -29,12 +29,14 @@ interface IPassDirs extends IStorage
 
     /**
      * @param string $key
+     * @throws StorageException
      * @return bool
      */
     public function isReadable(string $key): bool;
 
     /**
      * @param string $key
+     * @throws StorageException
      * @return bool
      */
     public function isWritable(string $key): bool;
