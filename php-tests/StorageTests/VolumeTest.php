@@ -35,6 +35,8 @@ class VolumeTest extends CommonTestClass
         }
         file_put_contents($mockPath, 'just leave it there');
         $this->assertTrue($volume->check($mockPath . DIRECTORY_SEPARATOR));
+        $this->assertTrue($volume->isReadable($mockPath . DIRECTORY_SEPARATOR));
+        $this->assertTrue($volume->isWritable($mockPath . DIRECTORY_SEPARATOR));
         rmdir($mockPath);
     }
 
@@ -58,9 +60,13 @@ class VolumeTest extends CommonTestClass
     {
         $volume = new Target\Volume();
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isReadable($this->mockTestFile()));
+        $this->assertFalse($volume->isWritable($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->assertTrue($volume->save($this->mockTestFile(), 'asdfghjklpoiuztrewqyxcvbnm'));
         $this->assertTrue($volume->exists($this->mockTestFile()));
+        $this->assertTrue($volume->isReadable($this->mockTestFile()));
+        $this->assertTrue($volume->isWritable($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->assertTrue($volume->isFile($this->mockTestFile()));
         $this->assertEquals(26, $volume->size($this->mockTestFile()));
@@ -79,6 +85,8 @@ class VolumeTest extends CommonTestClass
         $this->assertFalse($volume->remove($this->mockTestFile('4')));
         $this->assertFalse($volume->remove($this->mockTestFile('5')));
         $this->assertFalse($volume->exists($this->mockTestFile()));
+        $this->assertFalse($volume->isReadable($this->mockTestFile()));
+        $this->assertFalse($volume->isWritable($this->mockTestFile()));
         $this->assertFalse($volume->isDir($this->mockTestFile()));
         $this->assertNull($volume->size($this->mockTestFile()));
         $this->assertNull($volume->created($this->mockTestFile()));

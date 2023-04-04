@@ -41,6 +41,8 @@ class VolumeStorageTest extends CommonTestClass
     {
         $volume = $this->getLib();
         $this->assertFalse($volume->exists($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isReadable($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isWritable($this->mockTestFile('', false)));
         $this->assertFalse($volume->isDir($this->mockTestFile('', false)));
         $this->expectException(StorageException::class);
         $volume->read($this->mockTestFile('', false));
@@ -54,8 +56,12 @@ class VolumeStorageTest extends CommonTestClass
         $volume = $this->getLib();
         $this->assertFalse($volume->exists($this->mockTestFile('', false)));
         $this->assertFalse($volume->isDir($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isReadable($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isWritable($this->mockTestFile('', false)));
         $this->assertTrue($volume->write($this->mockTestFile('', false), 'asdfghjklpoiuztrewqyxcvbnm'));
         $this->assertTrue($volume->exists($this->mockTestFile('', false)));
+        $this->assertTrue($volume->isReadable($this->mockTestFile('', false)));
+        $this->assertTrue($volume->isWritable($this->mockTestFile('', false)));
         $this->assertFalse($volume->isDir($this->mockTestFile('', false)));
         $this->assertTrue($volume->isFile($this->mockTestFile('', false)));
         $this->assertEquals(26, $volume->size($this->mockTestFile('', false)));
@@ -74,6 +80,8 @@ class VolumeStorageTest extends CommonTestClass
         $this->assertFalse($volume->remove($this->mockTestFile('4', false)));
         $this->assertFalse($volume->remove($this->mockTestFile('5', false)));
         $this->assertFalse($volume->exists($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isReadable($this->mockTestFile('', false)));
+        $this->assertFalse($volume->isWritable($this->mockTestFile('', false)));
         $this->assertFalse($volume->isDir($this->mockTestFile('', false)));
         $this->assertNull($volume->size($this->mockTestFile('', false)));
         $this->assertNull($volume->created($this->mockTestFile('', false)));
