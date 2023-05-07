@@ -13,8 +13,8 @@ class KeysTest extends CommonTestClass
     public function testInit(): void
     {
         $factory = new Key\Factory();
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Key\DirKey', $factory->getKey(new Target\Volume()));
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Key\DefaultKey', $factory->getKey(new \TargetMock()));
+        $this->assertInstanceOf(Key\DirKey::class, $factory->getKey(new Target\Volume()));
+        $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new \TargetMock()));
     }
 
     public function testDefaultKey(): void

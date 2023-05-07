@@ -64,14 +64,18 @@ class MemoryTest extends CommonTestClass
             'dummyFile.2.tst' => false,
         ], $removal);
 
-        iterator_to_array($memory->lookup('this path does not exists'));
-        $this->assertEquals(0, count(array_filter(iterator_to_array($memory->lookup($this->getTestDir())), [$this, 'dotDirs'])));
-
         $memory->save($this->getTestDir() . 'dummyFile.tst', 'asdfghjklqwertzuiopyxcvbnm');
         $memory->save($this->getTestDir() . 'dummyFile.0.tst', 'asdfghjklqwertzuiopyxcvbnm');
         $memory->save($this->getTestDir() . 'dummyFile.1.tst', 'asdfghjklqwertzuiopyxcvbnm');
         $memory->save($this->getTestDir() . 'dummyFile.2.tst', 'asdfghjklqwertzuiopyxcvbnm');
 
+        // non-existent path
+        $this->assertEquals(0, count(array_filter(iterator_to_array($memory->lookup('this path does not exists')), [$this, 'dotDirs'])));
+
+        // empty path - must show everything
+        $this->assertEquals(4, count(array_filter(iterator_to_array($memory->lookup('')), [$this, 'dotDirs'])));
+
+        // normal path
         $files = iterator_to_array($memory->lookup($this->getTestDir()));
         sort($files);
         $files = array_filter($files, [$this, 'dotDirs']);

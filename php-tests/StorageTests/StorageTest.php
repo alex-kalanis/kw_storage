@@ -19,11 +19,11 @@ class StorageTest extends CommonTestClass
     public function testFactory(): void
     {
         $factory = new Target\Factory();
-        $this->assertInstanceOf('\TargetMock', $factory->getStorage(new \TargetMock()));
+        $this->assertInstanceOf(\TargetMock::class, $factory->getStorage(new \TargetMock()));
         $this->assertEmpty($factory->getStorage([]));
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Target\Volume', $factory->getStorage(['storage' => 'volume']));
+        $this->assertInstanceOf(Target\Volume::class, $factory->getStorage(['storage' => 'volume']));
         $this->assertEmpty($factory->getStorage(['storage' => 'none']));
-        $this->assertInstanceOf('\kalanis\kw_storage\Storage\Target\Volume', $factory->getStorage('volume'));
+        $this->assertInstanceOf(Target\Volume::class, $factory->getStorage('volume'));
         $this->assertEmpty($factory->getStorage('none'));
         $this->assertEmpty($factory->getStorage('what'));
         $this->assertEmpty($factory->getStorage(null));
