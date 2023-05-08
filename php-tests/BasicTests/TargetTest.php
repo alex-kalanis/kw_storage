@@ -4,7 +4,7 @@ namespace BasicTests;
 
 
 use CommonTestClass;
-use kalanis\kw_storage\Interfaces\IStorage;
+use kalanis\kw_storage\Interfaces;
 use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
 
@@ -15,6 +15,18 @@ class TargetTest extends CommonTestClass
     {
         $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
         $this->assertEmpty($factory->getStorage('none'));
+    }
+
+    public function testVolume(): void
+    {
+        $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
+        $out = $factory->getStorage('volume');
+        $this->assertInstanceOf(Interfaces\IPassDirs::class, $out);
+        $this->assertInstanceOf(Interfaces\IStorage::class, $out);
+
+        $out = $factory->getStorage(new \TargetMock());
+        $this->assertFalse($out instanceof Interfaces\IPassDirs);
+        $this->assertInstanceOf(Interfaces\IStorage::class, $out);
     }
 
     /**
@@ -67,7 +79,7 @@ class TargetTest extends CommonTestClass
         $this->assertEmpty($volume->removeMulti(['dummyFile.tst']));
     }
 
-    protected function getStorageVolume(): IStorage
+    protected function getStorageVolume(): Interfaces\IStorage
     {
         return $this->getStorageFactory()->getStorage(null);
     }
