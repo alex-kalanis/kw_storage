@@ -17,16 +17,26 @@ class TargetTest extends CommonTestClass
         $this->assertEmpty($factory->getStorage('none'));
     }
 
+    /**
+     * @throws StorageException
+     */
     public function testVolume(): void
     {
         $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
-        $out = $factory->getStorage('volume');
-        $this->assertInstanceOf(Interfaces\IPassDirs::class, $out);
-        $this->assertInstanceOf(Interfaces\IStorage::class, $out);
+        $out1 = $factory->getStorage('volume');
+        $this->assertInstanceOf(Interfaces\IPassDirs::class, $out1);
+        $this->assertInstanceOf(Interfaces\IStorage::class, $out1);
+        $this->assertFalse($out1->isFlat());
 
-        $out = $factory->getStorage(new \TargetMock());
-        $this->assertFalse($out instanceof Interfaces\IPassDirs);
-        $this->assertInstanceOf(Interfaces\IStorage::class, $out);
+        $out2 = $factory->getStorage('volume::flat');
+        $this->assertInstanceOf(Interfaces\IPassDirs::class, $out2);
+        $this->assertInstanceOf(Interfaces\IStorage::class, $out2);
+        $this->assertTrue($out2->isFlat());
+
+        $out3 = $factory->getStorage(new \TargetMock());
+        $this->assertFalse($out3 instanceof Interfaces\IPassDirs);
+        $this->assertInstanceOf(Interfaces\IStorage::class, $out3);
+        $this->assertFalse($out3->isFlat());
     }
 
     /**

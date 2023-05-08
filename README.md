@@ -60,3 +60,9 @@ into your "setup.py":
 
 1.) Connect the "kw_storage.storage" into your app. When it came necessary
 you can extends every library to comply your use-case, mainly format of storage.
+
+#### Notes
+
+Listing output contains storage separators. Asked root record is empty, the rest
+has that separator at least on the beginning. It depends on storage and class
+if the listing came with complete tree with sub-entries or just first level.

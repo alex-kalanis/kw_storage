@@ -134,22 +134,22 @@ class VolumeTest extends CommonTestClass
         file_put_contents($this->getTestDir() . 'dummyFile.2.tst', 'asdfghjklqwertzuiopyxcvbnm');
 
         // non-existent path
-        $this->assertEquals(0, count(array_filter(iterator_to_array($volume->lookup('this path does not exists')), [$this, 'dotDirs'])));
+        $this->assertEquals(0, count(array_filter(array_filter(iterator_to_array($volume->lookup('this path does not exists'))), [$this, 'dotDirs'])));
 
         // empty path - must show everything
         // 5 -> + gitkeep; but here goes into exec path, so the results are environment-dependent
-//        $this->assertEquals(5, count(array_filter(iterator_to_array($volume->lookup('')), [$this, 'dotDirs'])));
+//        $this->assertEquals(5, count(array_filter(array_filter(iterator_to_array($volume->lookup(''))), [$this, 'dotDirs'])));
 
         $files = iterator_to_array($volume->lookup($this->getTestDir()));
         sort($files);
-        $files = array_filter($files, [$this, 'dotDirs']);
+        $files = array_filter(array_filter($files), [$this, 'dotDirs']);
 
         $this->assertEquals(count($testFiles) + 1, count($files)); // because gitkeep
-        $this->assertEquals('.gitkeep', reset($files));
-        $this->assertEquals('dummyFile.0.tst', next($files));
-        $this->assertEquals('dummyFile.1.tst', next($files));
-        $this->assertEquals('dummyFile.2.tst', next($files));
-        $this->assertEquals('dummyFile.tst', next($files));
+        $this->assertEquals(DIRECTORY_SEPARATOR . '.gitkeep', reset($files));
+        $this->assertEquals(DIRECTORY_SEPARATOR . 'dummyFile.0.tst', next($files));
+        $this->assertEquals(DIRECTORY_SEPARATOR . 'dummyFile.1.tst', next($files));
+        $this->assertEquals(DIRECTORY_SEPARATOR . 'dummyFile.2.tst', next($files));
+        $this->assertEquals(DIRECTORY_SEPARATOR . 'dummyFile.tst', next($files));
 
         $removal = $volume->removeMulti($testFiles);
         $this->assertFalse($volume->exists($this->getTestDir() . 'dummyFile.tst'));
