@@ -11,6 +11,9 @@ use kalanis\kw_storage\StorageException;
 
 class TargetTest extends CommonTestClass
 {
+    /**
+     * @throws StorageException
+     */
     public function testInit(): void
     {
         $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
@@ -89,6 +92,10 @@ class TargetTest extends CommonTestClass
         $this->assertEmpty($volume->removeMulti(['dummyFile.tst']));
     }
 
+    /**
+     * @throws StorageException
+     * @return Interfaces\IStorage
+     */
     protected function getStorageVolume(): Interfaces\IStorage
     {
         return $this->getStorageFactory()->getStorage(null);

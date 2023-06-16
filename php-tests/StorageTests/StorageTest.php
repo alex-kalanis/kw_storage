@@ -5,6 +5,8 @@ namespace StorageTests;
 
 use CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
+use kalanis\kw_storage\StorageException;
+use kalanis\kw_storage\Translations;
 
 
 class StorageTest extends CommonTestClass
@@ -19,6 +21,7 @@ class StorageTest extends CommonTestClass
     /**
      * @param string $what
      * @param mixed $in
+     * @throws StorageException
      * @dataProvider factoryFillProvider
      */
     public function testFactoryFill(string $what, $in): void
@@ -33,6 +36,8 @@ class StorageTest extends CommonTestClass
             [\TargetMock::class, new \TargetMock()],
             [Target\Memory::class, ['storage' => 'mem']],
             [Target\Memory::class, ['storage' => 'memory']],
+            [Target\Memory::class, ['storage' => new Target\Memory()]],
+            [Target\Memory::class, ['storage' => 'memory', 'lang' => new Translations()]],
             [Target\Volume::class, ['storage' => 'vol']],
             [Target\Volume::class, ['storage' => 'volume']],
             [Target\Volume::class, ['storage' => 'local']],
@@ -60,6 +65,7 @@ class StorageTest extends CommonTestClass
 
     /**
      * @param mixed $in
+     * @throws StorageException
      * @dataProvider factoryEmptyProvider
      */
     public function testFactoryEmpty($in): void
@@ -73,10 +79,31 @@ class StorageTest extends CommonTestClass
         return [
             [[]],
             [['storage' => 'none']],
+            [['storage' => new Translations()]], // not a storage
             ['none'],
             ['what'],
             [null],
             [false],
         ];
     }
+
+    /**
+     * @throws StorageException
+     */
+    public function testFactoryNotExists(): void
+    {
+        $factory = new XFactory();
+        $this->expectException(StorageException::class);
+        $factory->getStorage('not-exists');
+    }
+}
+
+
+class XFactory extends Target\Factory
+{
+    protected static $pairs = [
+        'memory' => Target\Memory::class,
+        'none' => null,
+        'not-exists' => 'this-class-does-not-exists',
+    ];
 }

@@ -7,6 +7,7 @@ use CommonTestClass;
 use kalanis\kw_storage\Helper;
 use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
+use kalanis\kw_storage\Translations;
 
 
 class StorageTest extends CommonTestClass
@@ -24,10 +25,20 @@ class StorageTest extends CommonTestClass
     /**
      * @throws StorageException
      */
-    public function testStorageInitialized(): void
+    public function testStorageInitialized1(): void
     {
         Helper::initStorage();
-        $volume = $this->getStorageVolume();
+        $volume = $this->getStorageVolume1();
+        $this->assertTrue($volume->isConnected());
+        $this->assertFalse($volume->exists('utz'));
+    }
+
+    /**
+     * @throws StorageException
+     */
+    public function testStorageInitialized2(): void
+    {
+        $volume = $this->getStorageVolume2();
         $this->assertTrue($volume->isConnected());
         $this->assertFalse($volume->exists('utz'));
     }
@@ -37,7 +48,7 @@ class StorageTest extends CommonTestClass
      */
     public function testOperations(): void
     {
-        $volume = $this->getStorageVolume();
+        $volume = $this->getStorageVolume1();
         $this->assertTrue($volume->set('abv', 'sdfhgdfh', null)); // must be empty timeout - enables in result - hack
         $this->assertTrue($volume->add('abv', 'dummy mock', null)); // must be same as in mock and have no timer - hack
         $this->assertEquals('dummy mock', $volume->get('abv'));
@@ -50,7 +61,7 @@ class StorageTest extends CommonTestClass
      */
     public function testLookup(): void
     {
-        $volume = $this->getStorageVolume();
+        $volume = $this->getStorageVolume1();
         $this->assertEmpty(iterator_to_array($volume->getAllKeys()));
     }
 
@@ -59,7 +70,7 @@ class StorageTest extends CommonTestClass
      */
     public function testVolumeFileCounter(): void
     {
-        $volume = $this->getStorageVolume();
+        $volume = $this->getStorageVolume1();
         $this->assertTrue($volume->increment($this->mockTestFile()));
         $this->assertFalse($volume->decrement($this->mockTestFile()));
     }
@@ -69,14 +80,31 @@ class StorageTest extends CommonTestClass
      */
     public function testVolumeFileHarderCounter(): void
     {
-        $volume = $this->getStorageVolume();
+        $volume = $this->getStorageVolume1();
         $this->assertEmpty($volume->deleteMulti(['dummyFile.tst']));
     }
 
-    protected function getStorageVolume(): Storage
+    /**
+     * @throws StorageException
+     * @return Storage
+     * For testing purposes that factory returns only one possible class
+     */
+    protected function getStorageVolume1(): Storage
     {
         $storage = new Storage($this->getStorageFactory());
         $storage->init(null);
+        return $storage;
+    }
+
+    /**
+     * @throws StorageException
+     * @return Storage
+     * For testing purposes that factory returns only one possible class
+     */
+    protected function getStorageVolume2(): Storage
+    {
+        $storage = new Storage($this->getStorageFactory(), new Translations());
+        $storage->init(['something' => 'somewhere']);
         return $storage;
     }
 

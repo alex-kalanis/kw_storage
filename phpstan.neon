@@ -14,3 +14,5 @@ parameters:
 		# solved by unit tests
 		- '#Cannot call method read\(\) on Directory\|false.#'
 		- '#Cannot call method close\(\) on Directory\|false.#'
+		# intval, strval
+		- '#Parameter \#1 \$va[rl]u?e? of function [si][tn][rt]val expects#'
