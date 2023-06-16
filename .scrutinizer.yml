@@ -1,9 +1,8 @@
 filter:
   excluded_paths:
     - 'vendor/*'
-    - 'php-tests/_autoload.php'
-    - 'php-tests/_bootstrap.php'
-    - 'php-tests/data/*'
+    - '.github/*'
+    - 'php-tests/*'
     - 'kw_tests/*'
     - 'kw_storage/*'
   paths: {  }
