@@ -1,35 +1,18 @@
 <?php
 
-namespace TraitsTests;
+namespace AccessTests;
 
 
-use kalanis\kw_storage\Interfaces\IStTranslations;
-use kalanis\kw_storage\Traits\TLang;
-use kalanis\kw_storage\Translations;
+use CommonTestClass;
+use kalanis\kw_storage\Interfaces;
 
 
-class LangTest extends \CommonTestClass
+abstract class AAccessTest extends CommonTestClass
 {
-    public function testSimple(): void
-    {
-        $lib = new XLang();
-        $this->assertNotEmpty($lib->getStLang());
-        $this->assertInstanceOf(Translations::class, $lib->getStLang());
-        $lib->setStLang(new XTrans());
-        $this->assertInstanceOf(XTrans::class, $lib->getStLang());
-        $lib->setStLang(null);
-        $this->assertInstanceOf(Translations::class, $lib->getStLang());
-    }
 }
 
 
-class XLang
-{
-    use TLang;
-}
-
-
-class XTrans implements IStTranslations
+class XStLang implements Interfaces\IStTranslations
 {
     public function stCannotReadKey(): string
     {

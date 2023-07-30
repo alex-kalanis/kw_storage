@@ -23,6 +23,15 @@ class TargetTest extends CommonTestClass
     /**
      * @throws StorageException
      */
+    public function testAlreadyKnown(): void
+    {
+        $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());
+        $this->assertNotEmpty($factory->getStorage(new Storage\Storage(new Storage\Key\DefaultKey(), new Storage\Target\Memory())));
+    }
+
+    /**
+     * @throws StorageException
+     */
     public function testVolume(): void
     {
         $factory = new Storage\Factory(new \MockKeyFactory(), new Storage\Target\Factory());

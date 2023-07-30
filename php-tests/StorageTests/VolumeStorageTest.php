@@ -5,7 +5,7 @@ namespace StorageTests;
 
 use CommonTestClass;
 use kalanis\kw_storage\Interfaces\IPassDirs;
-use kalanis\kw_storage\Storage\Key\DirKey;
+use kalanis\kw_storage\Storage\Key\StaticPrefixKey;
 use kalanis\kw_storage\Storage\StorageDirs;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
@@ -200,9 +200,9 @@ class VolumeStorageTest extends CommonTestClass
 
     protected function getLib(): IPassDirs
     {
-        DirKey::setDir($this->getTestDir());
+        StaticPrefixKey::setPrefix($this->getTestDir());
         $volume = new Target\Volume();
         $volume->check($this->getTestDir());
-        return new StorageDirs(new DirKey(), $volume);
+        return new StorageDirs(new StaticPrefixKey(), $volume);
     }
 }
