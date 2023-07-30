@@ -16,7 +16,7 @@ where it's necessary for store states of upload.
 ```
 {
     "require": {
-        "alex-kalanis/kw_storage": "3.0"
+        "alex-kalanis/kw_storage": "4.0"
     }
 }
 ```
@@ -26,6 +26,7 @@ familiar with composer)
 
 ## Changes
 
+* 4.0 - Redefine factories and some key classes
 * 3.0 - Redefine interfaces for targets
 * 2.0 - Redefine Key-Value storing data
   * Remove formats and cache support (that should not be a problem of storage)
@@ -45,21 +46,6 @@ familiar with composer)
 4.) Extend your libraries by interfaces inside the package.
 
 5.) Just use inside your app.
-
-## Python Installation
-
-into your "setup.py":
-
-```
-    install_requires=[
-        'kw_storage',
-    ]
-```
-
-## Python Usage
-
-1.) Connect the "kw_storage.storage" into your app. When it came necessary
-you can extends every library to comply your use-case, mainly format of storage.
 
 #### Notes
 

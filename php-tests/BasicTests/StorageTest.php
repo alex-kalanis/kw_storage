@@ -36,6 +36,24 @@ class StorageTest extends CommonTestClass
     /**
      * @throws StorageException
      */
+    public function testHelperStorage(): void
+    {
+        $volume = Helper::getStorage(['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => 'memory']);
+        $this->assertInstanceOf(Storage\Storage::class, $volume);
+    }
+
+    /**
+     * @throws StorageException
+     */
+    public function testHelperStorageMulti(): void
+    {
+        $volume = Helper::getMultiStorage(['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => 'memory'], 'another');
+        $this->assertInstanceOf(Storage\Storage::class, $volume);
+    }
+
+    /**
+     * @throws StorageException
+     */
     public function testStorageInitialized2(): void
     {
         $volume = $this->getStorageVolume2();

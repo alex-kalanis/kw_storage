@@ -17,7 +17,6 @@ use ReflectionException;
 /**
  * Class Factory
  * @package kalanis\kw_storage\Access
- * @todo Je to skladacka - klice + uloziste a to cele se nacpe libce; nevede tu statickou variantu
  */
 class Factory
 {
