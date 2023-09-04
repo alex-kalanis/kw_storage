@@ -53,7 +53,7 @@ class FactoryTest extends CommonTestClass
             [['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => new Target\Memory()]], // path to dir as array, target set
             [['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => new \stdClass()]], // path to dir as array, target shit
             [['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => 'volume']], // path to dir as array, target set
-            [['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => 99]], // path to dir as array, target shit
+            [['storage' => ['storage_key' => [__DIR__, '..', 'data'], 'storage_target' => 99]]], // path to dir as array, target shit
         ];
     }
 
@@ -97,7 +97,6 @@ class FactoryTest extends CommonTestClass
     }
 
     /**
-     * @throws StorageException
      * @return array<object|string|int|bool|null|array<string|int, object|string|int|bool|null>>
      */
     public function crashProvider(): array
