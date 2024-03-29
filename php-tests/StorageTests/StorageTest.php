@@ -45,9 +45,6 @@ class StorageTest extends CommonTestClass
             [Target\VolumeTargetFlat::class, ['storage' => 'volume::flat']],
             [Target\VolumeTargetFlat::class, ['storage' => 'local::flat']],
             [Target\VolumeTargetFlat::class, ['storage' => 'drive::flat']],
-            [Target\VolumeStream::class, ['storage' => 'volume::stream']],
-            [Target\VolumeStream::class, ['storage' => 'local::stream']],
-            [Target\VolumeStream::class, ['storage' => 'drive::stream']],
             [Target\Memory::class, 'mem'],
             [Target\Memory::class, 'memory'],
             [Target\Volume::class, 'vol'],
@@ -57,9 +54,6 @@ class StorageTest extends CommonTestClass
             [Target\VolumeTargetFlat::class, 'volume::flat'],
             [Target\VolumeTargetFlat::class, 'local::flat'],
             [Target\VolumeTargetFlat::class, 'drive::flat'],
-            [Target\VolumeStream::class, 'volume::stream'],
-            [Target\VolumeStream::class, 'local::stream'],
-            [Target\VolumeStream::class, 'drive::stream'],
         ];
     }
 
@@ -101,7 +95,7 @@ class StorageTest extends CommonTestClass
 
 class XFactory extends Target\Factory
 {
-    protected static $pairs = [
+    protected static array $pairs = [
         'memory' => Target\Memory::class,
         'none' => null,
         'not-exists' => 'this-class-does-not-exists',

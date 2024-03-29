@@ -16,7 +16,6 @@ class KeysTest extends CommonTestClass
         $factory = new Key\Factory();
         $this->assertInstanceOf(Key\StaticPrefixKey::class, $factory->getKey(new Target\Volume()));
         $this->assertInstanceOf(Key\StaticPrefixKey::class, $factory->getKey(new Target\VolumeTargetFlat()));
-        $this->assertInstanceOf(Key\StaticPrefixKey::class, $factory->getKey(new Target\VolumeStream()));
         $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new Target\Memory()));
         $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new \TargetMock()));
     }

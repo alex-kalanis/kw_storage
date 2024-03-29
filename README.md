@@ -1,9 +1,9 @@
 # kw_storage
 
-[![Build Status](https://app.travis-ci.com/alex-kalanis/kw_storage.svg?branch=master)](https://app.travis-ci.com/github/alex-kalanis/kw_storage)
+![Build Status](https://github.com/alex-kalanis/kw_storage/actions/workflows/code_checks.yml/badge.svg)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/alex-kalanis/kw_storage/v/stable.svg?v=1)](https://packagist.org/packages/alex-kalanis/kw_storage)
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.4-8892BF.svg)](https://php.net/)
 [![Downloads](https://img.shields.io/packagist/dt/alex-kalanis/kw_storage.svg?v1)](https://packagist.org/packages/alex-kalanis/kw_storage)
 [![License](https://poser.pugx.org/alex-kalanis/kw_storage/license.svg?v=1)](https://packagist.org/packages/alex-kalanis/kw_storage)
 [![Code Coverage](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/badges/coverage.png?b=master&v=1)](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/?branch=master)
@@ -13,12 +13,8 @@ where it's necessary for store states of upload.
 
 ## PHP Installation
 
-```
-{
-    "require": {
-        "alex-kalanis/kw_storage": "4.0"
-    }
-}
+```bash
+composer.phar require alex-kalanis/kw_storage
 ```
 
 (Refer to [Composer Documentation](https://github.com/composer/composer/blob/master/doc/00-intro.md#introduction) if you are not
@@ -26,6 +22,7 @@ familiar with composer)
 
 ## Changes
 
+* 5.0 - Streams are on different level, not here
 * 4.0 - Redefine factories and some key classes
 * 3.0 - Redefine interfaces for targets
 * 2.0 - Redefine Key-Value storing data

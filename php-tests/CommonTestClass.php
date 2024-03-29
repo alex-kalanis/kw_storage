@@ -44,12 +44,12 @@ class TargetMock implements \kalanis\kw_storage\Interfaces\ITarget
         return false;
     }
 
-    public function load(string $key)
+    public function load(string $key): string
     {
         return 'dummy mock';
     }
 
-    public function save(string $key, $data, ?int $timeout = null): bool
+    public function save(string $key, string $data, ?int $timeout = null): bool
     {
         return empty($timeout);
     }
