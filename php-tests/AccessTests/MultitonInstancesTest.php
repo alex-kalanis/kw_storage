@@ -3,10 +3,11 @@
 namespace tests\AccessTests;
 
 
-use kalanis\kw_storage\Access;
+use tests\CommonTestClass;
+use tests\Support\XStLang;
 
 
-class MultitonInstancesTest extends AAccessTest
+class MultitonInstancesTest extends CommonTestClass
 {
     public function testRun(): void
     {
@@ -16,14 +17,5 @@ class MultitonInstancesTest extends AAccessTest
 
         XMuInstances::init(new XStLang());
         $this->assertNotEquals($inst1, XMuInstances::getInstance());
-    }
-}
-
-
-class XMuInstances extends Access\MultitonInstances
-{
-    public static function clear(): void
-    {
-        static::$instance = null;
     }
 }

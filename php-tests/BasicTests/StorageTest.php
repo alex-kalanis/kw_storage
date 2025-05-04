@@ -3,11 +3,11 @@
 namespace tests\BasicTests;
 
 
-use tests\CommonTestClass;
 use kalanis\kw_storage\Helper;
 use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Translations;
+use tests\CommonTestClass;
 
 
 class StorageTest extends CommonTestClass
@@ -128,6 +128,6 @@ class StorageTest extends CommonTestClass
 
     protected function getStorageFactory(): Storage\Factory
     {
-        return new Storage\Factory(new \tests\MockKeyFactory(), new \tests\MockTargetFactory());
+        return new Storage\Factory(new \tests\Support\MockKeyFactory(), new \tests\Support\MockTargetFactory());
     }
 }

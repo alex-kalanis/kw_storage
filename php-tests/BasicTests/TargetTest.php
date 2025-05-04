@@ -3,10 +3,10 @@
 namespace tests\BasicTests;
 
 
-use tests\CommonTestClass;
 use kalanis\kw_storage\Interfaces;
 use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
+use tests\CommonTestClass;
 
 
 class TargetTest extends CommonTestClass
@@ -16,7 +16,7 @@ class TargetTest extends CommonTestClass
      */
     public function testInit(): void
     {
-        $factory = new Storage\Factory(new \tests\MockKeyFactory(), new Storage\Target\Factory());
+        $factory = new Storage\Factory(new \tests\Support\MockKeyFactory(), new Storage\Target\Factory());
         $this->assertEmpty($factory->getStorage('none'));
     }
 
@@ -25,7 +25,7 @@ class TargetTest extends CommonTestClass
      */
     public function testAlreadyKnown(): void
     {
-        $factory = new Storage\Factory(new \tests\MockKeyFactory(), new Storage\Target\Factory());
+        $factory = new Storage\Factory(new \tests\Support\MockKeyFactory(), new Storage\Target\Factory());
         $this->assertNotEmpty($factory->getStorage(new Storage\Storage(new Storage\Key\DefaultKey(), new Storage\Target\Memory())));
     }
 
@@ -34,7 +34,7 @@ class TargetTest extends CommonTestClass
      */
     public function testVolume(): void
     {
-        $factory = new Storage\Factory(new \tests\MockKeyFactory(), new Storage\Target\Factory());
+        $factory = new Storage\Factory(new \tests\Support\MockKeyFactory(), new Storage\Target\Factory());
         $out1 = $factory->getStorage('volume');
         $this->assertInstanceOf(Interfaces\IPassDirs::class, $out1);
         $this->assertInstanceOf(Interfaces\IStorage::class, $out1);
@@ -45,7 +45,7 @@ class TargetTest extends CommonTestClass
         $this->assertInstanceOf(Interfaces\IStorage::class, $out2);
         $this->assertTrue($out2->isFlat());
 
-        $out3 = $factory->getStorage(new \tests\TargetMock());
+        $out3 = $factory->getStorage(new \tests\Support\TargetMock());
         $this->assertFalse($out3 instanceof Interfaces\IPassDirs);
         $this->assertInstanceOf(Interfaces\IStorage::class, $out3);
         $this->assertFalse($out3->isFlat());
@@ -112,6 +112,6 @@ class TargetTest extends CommonTestClass
 
     protected function getStorageFactory(): Storage\Factory
     {
-        return new Storage\Factory(new \tests\MockKeyFactory(), new \tests\MockTargetFactory());
+        return new Storage\Factory(new \tests\Support\MockKeyFactory(), new \tests\Support\MockTargetFactory());
     }
 }

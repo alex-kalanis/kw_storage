@@ -3,10 +3,10 @@
 namespace tests\BasicTests;
 
 
-use tests\CommonTestClass;
 use kalanis\kw_storage\Storage\Key;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
+use tests\CommonTestClass;
 
 
 class KeysTest extends CommonTestClass
@@ -17,7 +17,7 @@ class KeysTest extends CommonTestClass
         $this->assertInstanceOf(Key\StaticPrefixKey::class, $factory->getKey(new Target\Volume()));
         $this->assertInstanceOf(Key\StaticPrefixKey::class, $factory->getKey(new Target\VolumeTargetFlat()));
         $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new Target\Memory()));
-        $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new \tests\TargetMock()));
+        $this->assertInstanceOf(Key\DefaultKey::class, $factory->getKey(new \tests\Support\TargetMock()));
     }
 
     public function testDefaultKey(): void

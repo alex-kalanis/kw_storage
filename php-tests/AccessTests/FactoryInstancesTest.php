@@ -3,10 +3,11 @@
 namespace tests\AccessTests;
 
 
-use kalanis\kw_storage\Access;
+use tests\CommonTestClass;
+use tests\Support\XStLang;
 
 
-class FactoryInstancesTest extends AAccessTest
+class FactoryInstancesTest extends CommonTestClass
 {
     public function testRun(): void
     {
@@ -16,14 +17,5 @@ class FactoryInstancesTest extends AAccessTest
 
         XFactInstances::init(new XStLang());
         $this->assertNotEquals($inst1, XFactInstances::getInstance());
-    }
-}
-
-
-class XFactInstances extends Access\FactoryInstances
-{
-    public static function clear(): void
-    {
-        static::$instance = null;
     }
 }

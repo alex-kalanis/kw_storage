@@ -4,7 +4,6 @@ namespace tests\StorageTests;
 
 
 use tests\CommonTestClass;
-use kalanis\kw_storage\Extras\TVolumeCopy;
 
 
 class VolumeCopyTest extends CommonTestClass
@@ -52,15 +51,3 @@ class VolumeCopyTest extends CommonTestClass
         $this->assertFalse($volume->copy($this->getTestDir() . 'unknown', $this->getTestDir() . 'target'));
     }
 }
-
-
-class XVolumeCopy
-{
-    use TVolumeCopy;
-
-    public function copy(string $source, string $dest): bool
-    {
-        return $this->xcopy($source, $dest);
-    }
-}
-

@@ -3,10 +3,10 @@
 namespace tests\StorageTests;
 
 
-use tests\CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Translations;
+use tests\CommonTestClass;
 
 
 class StorageTest extends CommonTestClass
@@ -33,7 +33,7 @@ class StorageTest extends CommonTestClass
     public function factoryFillProvider(): array
     {
         return [
-            [\tests\TargetMock::class, new \tests\TargetMock()],
+            [\tests\Support\TargetMock::class, new \tests\Support\TargetMock()],
             [Target\Memory::class, ['storage' => 'mem']],
             [Target\Memory::class, ['storage' => 'memory']],
             [Target\Memory::class, ['storage' => new Target\Memory()]],
@@ -90,14 +90,4 @@ class StorageTest extends CommonTestClass
         $this->expectException(StorageException::class);
         $factory->getStorage('not-exists');
     }
-}
-
-
-class XFactory extends Target\Factory
-{
-    protected static array $pairs = [
-        'memory' => Target\Memory::class,
-        'none' => null,
-        'not-exists' => 'this-class-does-not-exists',
-    ];
 }

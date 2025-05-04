@@ -1,15 +1,9 @@
 <?php
 
-namespace tests\AccessTests;
+namespace tests\Support;
 
 
-use tests\CommonTestClass;
 use kalanis\kw_storage\Interfaces;
-
-
-abstract class AAccessTest extends CommonTestClass
-{
-}
 
 
 class XStLang implements Interfaces\IStTranslations
