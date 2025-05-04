@@ -1,6 +1,6 @@
 <?php
 
-namespace kalanis\kw_storage\Interfaces;
+namespace kalanis\kw_storage\Interfaces\Target;
 
 
 /**

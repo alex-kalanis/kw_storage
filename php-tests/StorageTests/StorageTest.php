@@ -1,9 +1,9 @@
 <?php
 
-namespace StorageTests;
+namespace tests\StorageTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Translations;
@@ -33,7 +33,7 @@ class StorageTest extends CommonTestClass
     public function factoryFillProvider(): array
     {
         return [
-            [\TargetMock::class, new \TargetMock()],
+            [\tests\TargetMock::class, new \tests\TargetMock()],
             [Target\Memory::class, ['storage' => 'mem']],
             [Target\Memory::class, ['storage' => 'memory']],
             [Target\Memory::class, ['storage' => new Target\Memory()]],

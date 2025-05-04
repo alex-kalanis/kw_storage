@@ -1,9 +1,9 @@
 <?php
 
-namespace StorageTests;
+namespace tests\StorageTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
 
@@ -72,8 +72,8 @@ class VolumeTest extends CommonTestClass
         $this->assertEquals(26, $volume->size($this->mockTestFile()));
         $created = $volume->created($this->mockTestFile());
         $now = time();
-        $this->assertTrue($created > $now - 10);
-        $this->assertTrue($created < $now + 10);
+        $this->assertTrue($created->getTimestamp() > $now - 10);
+        $this->assertTrue($created->getTimestamp() < $now + 10);
         $this->assertEquals('asdfghjklpoiuztrewqyxcvbnm', $volume->load($this->mockTestFile()));
         $this->assertTrue($volume->copy($this->mockTestFile(), $this->mockTestFile('2')));
         $this->assertTrue($volume->move($this->mockTestFile(), $this->mockTestFile('3')));

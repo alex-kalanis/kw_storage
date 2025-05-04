@@ -1,9 +1,9 @@
 <?php
 
-namespace StorageTests;
+namespace tests\StorageTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Interfaces\IPassDirs;
 use kalanis\kw_storage\Storage\Key\StaticPrefixKey;
 use kalanis\kw_storage\Storage\StorageDirs;
@@ -67,8 +67,8 @@ class VolumeStorageTest extends CommonTestClass
         $this->assertEquals(26, $volume->size($this->mockTestFile('', false)));
         $created = $volume->created($this->mockTestFile('', false));
         $now = time();
-        $this->assertTrue($created > $now - 10);
-        $this->assertTrue($created < $now + 10);
+        $this->assertTrue($created->getTimestamp() > $now - 10);
+        $this->assertTrue($created->getTimestamp() < $now + 10);
         $this->assertEquals('asdfghjklpoiuztrewqyxcvbnm', $volume->read($this->mockTestFile('', false)));
         $this->assertTrue($volume->copy($this->mockTestFile('', false), $this->mockTestFile('2', false)));
         $this->assertTrue($volume->move($this->mockTestFile('', false), $this->mockTestFile('3', false)));

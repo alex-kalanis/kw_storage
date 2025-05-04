@@ -21,10 +21,10 @@ class MultitonInstances
         static::$instance = new self($lang);
     }
 
-    public static function getInstance(): Multiton
+    public static function getInstance(?Interfaces\IStTranslations $lang = null): Multiton
     {
         if (empty(static::$instance)) {
-            static::$instance = new self();
+            static::$instance = new self($lang);
         }
         return static::$instance->multi;
     }

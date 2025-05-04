@@ -1,14 +1,15 @@
 <?php
 
-namespace TraitsTests;
+namespace tests\TraitsTests;
 
 
+use tests\CommonTestClass;
 use kalanis\kw_storage\Interfaces\IStTranslations;
 use kalanis\kw_storage\Traits\TLang;
 use kalanis\kw_storage\Translations;
 
 
-class LangTest extends \CommonTestClass
+class LangTest extends CommonTestClass
 {
     public function testSimple(): void
     {
@@ -37,26 +38,6 @@ class XTrans implements IStTranslations
     }
 
     public function stCannotReadFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotOpenFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotSaveFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotSeekFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotCloseFile(): string
     {
         return 'mock';
     }

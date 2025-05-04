@@ -3,10 +3,11 @@
 namespace kalanis\kw_storage\Storage\Target;
 
 
+use DateTimeInterface;
 use kalanis\kw_storage\Extras\TRemoveCycle;
 use kalanis\kw_storage\Extras\TVolumeCopy;
 use kalanis\kw_storage\Interfaces\IStTranslations;
-use kalanis\kw_storage\Interfaces\ITargetVolume;
+use kalanis\kw_storage\Interfaces\Target\ITargetVolume;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Traits\TLang;
 use Traversable;
@@ -114,10 +115,11 @@ class Volume implements ITargetVolume
         return (false === $size) ? null : $size;
     }
 
-    public function created(string $key): ?int
+    public function created(string $key): ?DateTimeInterface
     {
         $created = @filemtime($key);
-        return (false === $created) ? null : $created;
+        $dateObj = (false === $created) ? false : date_create_immutable('@' . $created);
+        return (false === $dateObj) ? null : $dateObj;
     }
 
     public function lookup(string $path): Traversable

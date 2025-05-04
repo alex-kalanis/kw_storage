@@ -21,10 +21,10 @@ class FactoryInstances
         static::$instance = new self($lang);
     }
 
-    public static function getInstance(): Factory
+    public static function getInstance(?Interfaces\IStTranslations $lang = null): Factory
     {
         if (empty(static::$instance)) {
-            static::$instance = new self();
+            static::$instance = new self($lang);
         }
         return static::$instance->factory;
     }

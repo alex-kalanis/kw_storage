@@ -1,9 +1,9 @@
 <?php
 
-namespace StorageTests;
+namespace tests\StorageTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Storage\Target;
 use kalanis\kw_storage\StorageException;
 

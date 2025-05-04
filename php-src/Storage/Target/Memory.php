@@ -4,7 +4,7 @@ namespace kalanis\kw_storage\Storage\Target;
 
 
 use kalanis\kw_storage\Interfaces\IStTranslations;
-use kalanis\kw_storage\Interfaces\ITargetFlat;
+use kalanis\kw_storage\Interfaces\Target\ITargetFlat;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Traits\TLang;
 use Traversable;

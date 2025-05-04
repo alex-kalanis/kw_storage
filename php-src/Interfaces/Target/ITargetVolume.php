@@ -1,8 +1,9 @@
 <?php
 
-namespace kalanis\kw_storage\Interfaces;
+namespace kalanis\kw_storage\Interfaces\Target;
 
 
+use DateTimeInterface;
 use kalanis\kw_storage\StorageException;
 
 
@@ -38,7 +39,7 @@ interface ITargetVolume extends ITarget
     public function isWritable(string $key): bool;
 
     /**
-     * Create subdir
+     * Create subdirectory
      * @param string $key
      * @param bool $recursive
      * @throws StorageException
@@ -47,7 +48,7 @@ interface ITargetVolume extends ITarget
     public function mkDir(string $key, bool $recursive = false): bool;
 
     /**
-     * Remove subdir
+     * Remove subdirectory
      * @param string $key
      * @param bool $recursive
      * @throws StorageException
@@ -85,7 +86,7 @@ interface ITargetVolume extends ITarget
      * Get when node has been created
      * null if not exists or cannot get that info
      * @param string $key
-     * @return int|null
+     * @return DateTimeInterface|null
      */
-    public function created(string $key): ?int;
+    public function created(string $key): ?DateTimeInterface;
 }

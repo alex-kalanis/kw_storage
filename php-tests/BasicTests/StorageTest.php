@@ -1,9 +1,9 @@
 <?php
 
-namespace BasicTests;
+namespace tests\BasicTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Helper;
 use kalanis\kw_storage\Storage;
 use kalanis\kw_storage\StorageException;
@@ -128,6 +128,6 @@ class StorageTest extends CommonTestClass
 
     protected function getStorageFactory(): Storage\Factory
     {
-        return new Storage\Factory(new \MockKeyFactory(), new \MockTargetFactory());
+        return new Storage\Factory(new \tests\MockKeyFactory(), new \tests\MockTargetFactory());
     }
 }

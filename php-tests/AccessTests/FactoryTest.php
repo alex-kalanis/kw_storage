@@ -1,9 +1,9 @@
 <?php
 
-namespace AccessTests;
+namespace tests\AccessTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Access;
 use kalanis\kw_storage\Interfaces;
 use kalanis\kw_storage\StorageException;
@@ -115,7 +115,7 @@ class FactoryTest extends CommonTestClass
 
 class XFailFactory extends Access\Factory
 {
-    protected $targetMap = [
+    protected array $targetMap = [
         'class' => \stdClass::class,
         'null' => null,
         'not' => 'not-a-class',

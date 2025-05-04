@@ -1,6 +1,6 @@
 <?php
 
-namespace AccessTests;
+namespace tests\AccessTests;
 
 
 use kalanis\kw_storage\Access;

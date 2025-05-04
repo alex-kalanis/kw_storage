@@ -1,5 +1,8 @@
 <?php
 
+namespace tests;
+
+
 use kalanis\kw_storage\Interfaces;
 use kalanis\kw_storage\Storage;
 
@@ -32,7 +35,7 @@ class CommonTestClass extends \PHPUnit\Framework\TestCase
 }
 
 
-class TargetMock implements \kalanis\kw_storage\Interfaces\ITarget
+class TargetMock implements Interfaces\Target\ITarget
 {
     public function check(string $key): bool
     {
@@ -81,7 +84,7 @@ class TargetMock implements \kalanis\kw_storage\Interfaces\ITarget
 }
 
 
-class MockKey implements \kalanis\kw_storage\Interfaces\IKey
+class MockKey implements Interfaces\Target\IKey
 {
     public function fromSharedKey(string $key): string
     {
@@ -92,7 +95,7 @@ class MockKey implements \kalanis\kw_storage\Interfaces\IKey
 
 class MockKeyFactory extends Storage\Key\Factory
 {
-    public function getKey(Interfaces\ITarget $storage): Interfaces\IKey
+    public function getKey(Interfaces\Target\ITarget $storage): Interfaces\Target\IKey
     {
         return new MockKey();
     }
@@ -101,8 +104,8 @@ class MockKeyFactory extends Storage\Key\Factory
 
 class MockTargetFactory extends Storage\Target\Factory
 {
-    public function getStorage($params): Interfaces\ITarget
+    public function getStorage($params): Interfaces\Target\ITarget
     {
-        return new \TargetMock();
+        return new \tests\TargetMock();
     }
 }

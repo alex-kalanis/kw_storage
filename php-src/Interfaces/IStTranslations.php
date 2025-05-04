@@ -14,14 +14,6 @@ interface IStTranslations
 
     public function stCannotReadFile(): string;
 
-    public function stCannotOpenFile(): string;
-
-    public function stCannotSaveFile(): string;
-
-    public function stCannotSeekFile(): string;
-
-    public function stCannotCloseFile(): string;
-
     public function stStorageNotInitialized(): string;
 
     public function stPathNotFound(): string;

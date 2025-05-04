@@ -9,7 +9,21 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/badges/coverage.png?b=master&v=1)](https://scrutinizer-ci.com/g/alex-kalanis/kw_storage/?branch=master)
 
 Simple system for accessing key-value storages. Original is part of UploadPerPartes,
-where it's necessary for store states of upload.
+where it's necessary for store states of upload. To data it behaves like simple key-value
+storage. Which can derive to real flat storages like memory or redis or tree-like
+structures like your normal filesystem. No streams here.
+
+The main thing about this package are the interfaces. Especially ```IStorage``` which
+represents all supported operations over storages and shall be used on upper layers as
+the only necessary dependency.
+
+It is also the correct way to get it via ```Access\Factory``` class which select the
+best possible storage in accordance with passed params from your configuration. That
+can be put inside your DI.
+
+This package also contains translations interface. So you can customize error messages
+for your devs and users.
+
 
 ## PHP Installation
 
@@ -20,8 +34,10 @@ composer.phar require alex-kalanis/kw_storage
 (Refer to [Composer Documentation](https://github.com/composer/composer/blob/master/doc/00-intro.md#introduction) if you are not
 familiar with composer)
 
+
 ## Changes
 
+* 6.0 - Use DateTime interfaces, tests for 8.4 and own namespaces
 * 5.0 - Streams are on different level, not here
 * 4.0 - Redefine factories and some key classes
 * 3.0 - Redefine interfaces for targets
@@ -34,15 +50,24 @@ familiar with composer)
 
 ## PHP Usage
 
+It partially depends on real storage. Can be local filesystem, can be remote service too.
+But the interfaces in this package make them all equal in terms of usage. So...
+
 1.) Use your autoloader (if not already done via Composer autoloader)
 
-2.) Add some external packages with connection to the local or remote services.
+2.) Add some external packages with connection to the local or remote services. Can be
+    Redis or AWS or something else. Or nothing if it is only local FS.
 
-3.) Connect the "kalanis\kw_storage\Storage" or "kalanis\kw_storage\Helper" into your app. Extends it for setting your case, especially dirs.
+3.) Connect either ```kalanis\kw_storage\Interfaces\IStorage```, ```kalanis\kw_storage\Storage```
+    or ```kalanis\kw_storage\Helper``` into your app. That usually happens in DI. Extend it
+    for setting your case, especially if you use tree with dirs.
 
-4.) Extend your libraries by interfaces inside the package.
+4.) Extend your libraries by interfaces inside the package. Mainly
+    ```kalanis\kw_storage\Interfaces\IStorage``` which represents that available actions
+    or ```kalanis\kw_storage\Storage``` which packs it like facade.
 
 5.) Just use inside your app.
+
 
 #### Notes
 

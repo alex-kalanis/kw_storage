@@ -20,7 +20,7 @@ class Multiton
 
     protected Factory $factory;
     /** @var array<string, IStorage> */
-    protected $instances = [];
+    protected array $instances = [];
 
     public function __construct(?Interfaces\IStTranslations $lang = null)
     {

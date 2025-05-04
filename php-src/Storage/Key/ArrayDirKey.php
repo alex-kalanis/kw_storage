@@ -3,8 +3,8 @@
 namespace kalanis\kw_storage\Storage\Key;
 
 
-use kalanis\kw_storage\Interfaces\IKey;
 use kalanis\kw_storage\Interfaces\IStTranslations;
+use kalanis\kw_storage\Interfaces\Target\IKey;
 use kalanis\kw_storage\StorageException;
 use kalanis\kw_storage\Traits\TLang;
 

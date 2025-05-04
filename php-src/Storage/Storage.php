@@ -14,10 +14,10 @@ use Traversable;
  */
 class Storage implements Interfaces\IStorage
 {
-    protected Interfaces\ITarget $target;
-    protected Interfaces\IKey $key;
+    protected Interfaces\Target\ITarget $target;
+    protected Interfaces\Target\IKey $key;
 
-    public function __construct(Interfaces\IKey $key, Interfaces\ITarget $target)
+    public function __construct(Interfaces\Target\IKey $key, Interfaces\Target\ITarget $target)
     {
         $this->target = $target;
         $this->key = $key;
@@ -70,7 +70,7 @@ class Storage implements Interfaces\IStorage
 
     public function isFlat(): bool
     {
-        return $this->target instanceof Interfaces\ITargetFlat;
+        return $this->target instanceof Interfaces\Target\ITargetFlat;
     }
 
     public function multiKey(string $key): string

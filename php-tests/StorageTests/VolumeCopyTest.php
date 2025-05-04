@@ -1,9 +1,9 @@
 <?php
 
-namespace StorageTests;
+namespace tests\StorageTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Extras\TVolumeCopy;
 
 

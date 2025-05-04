@@ -3,6 +3,7 @@
 namespace kalanis\kw_storage\Storage;
 
 
+use DateTimeInterface;
 use kalanis\kw_storage\Interfaces;
 
 
@@ -13,9 +14,9 @@ use kalanis\kw_storage\Interfaces;
  */
 class StorageDirs extends Storage implements Interfaces\IPassDirs
 {
-    protected Interfaces\ITargetVolume $targetVolume;
+    protected Interfaces\Target\ITargetVolume $targetVolume;
 
-    public function __construct(Interfaces\IKey $key, Interfaces\ITargetVolume $target)
+    public function __construct(Interfaces\Target\IKey $key, Interfaces\Target\ITargetVolume $target)
     {
         parent::__construct($key, $target);
         $this->targetVolume = $target;
@@ -66,7 +67,7 @@ class StorageDirs extends Storage implements Interfaces\IPassDirs
         return $this->targetVolume->size($this->key->fromSharedKey($key));
     }
 
-    public function created(string $key): ?int
+    public function created(string $key): ?DateTimeInterface
     {
         return $this->targetVolume->created($this->key->fromSharedKey($key));
     }

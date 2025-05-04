@@ -1,6 +1,6 @@
 <?php
 
-namespace kalanis\kw_storage\Interfaces;
+namespace kalanis\kw_storage\Interfaces\Target;
 
 
 use kalanis\kw_storage\StorageException;
@@ -10,7 +10,7 @@ use Traversable;
 /**
  * Interface ITarget
  * @package kalanis\kw_storage\Interfaces
- * Basic operations over every storage
+ * Basic operations over every simple storage
  */
 interface ITarget
 {

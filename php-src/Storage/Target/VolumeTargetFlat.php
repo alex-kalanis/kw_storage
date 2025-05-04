@@ -3,7 +3,7 @@
 namespace kalanis\kw_storage\Storage\Target;
 
 
-use kalanis\kw_storage\Interfaces\ITargetFlat;
+use kalanis\kw_storage\Interfaces\Target\ITargetFlat;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;

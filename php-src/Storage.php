@@ -13,6 +13,7 @@ use Traversable;
  * Class Storage
  * @package kalanis\kw_storage
  * Main storage class
+ * Technically also facade for all basic operations
  */
 class Storage
 {
@@ -66,7 +67,7 @@ class Storage
      * Set data to storage
      * @param string $key
      * @param string $value
-     * @param int $expire
+     * @param int|null $expire
      * @throws StorageException
      * @return boolean
      */
@@ -79,13 +80,13 @@ class Storage
      * Add data to storage
      * @param string $key
      * @param string $value
-     * @param int $expire
+     * @param int|null $expire
      * @throws StorageException
      * @return boolean
      */
     public function add(string $key, string $value, ?int $expire = 8600): bool
     {
-        // safeadd for multithread at any system
+        // safeadd for multithread on any system
         if ($this->getStorage()->write($key, $value, $expire)) {
             return ( $value == $this->get($key) );
         }
@@ -152,7 +153,7 @@ class Storage
      * @throws StorageException
      * @return array<int|string, bool>
      */
-    public function deleteMulti(array $keys)
+    public function deleteMulti(array $keys): array
     {
         return $this->getStorage()->removeMulti($keys);
     }
@@ -164,7 +165,7 @@ class Storage
      * @throws StorageException
      * @codeCoverageIgnore mock has no keys for now
      */
-    public function deleteByPrefix(string $prefix, $inverse = false): void
+    public function deleteByPrefix(string $prefix, bool $inverse = false): void
     {
         $keysToDelete = [];
         foreach ($this->getAllKeys() as $memKey) {
@@ -189,7 +190,7 @@ class Storage
     /**
      * @throws StorageException
      */
-    protected function getStorage(): IStorage
+    public function getStorage(): IStorage
     {
         if (empty($this->storage)) {
             throw new StorageException($this->getStLang()->stStorageNotInitialized());

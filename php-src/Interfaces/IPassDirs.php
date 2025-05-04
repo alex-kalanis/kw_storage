@@ -3,6 +3,7 @@
 namespace kalanis\kw_storage\Interfaces;
 
 
+use DateTimeInterface;
 use kalanis\kw_storage\StorageException;
 
 
@@ -42,7 +43,7 @@ interface IPassDirs extends IStorage
     public function isWritable(string $key): bool;
 
     /**
-     * Create subdir
+     * Create subdirectory
      * @param string $key
      * @param bool $recursive
      * @throws StorageException
@@ -51,7 +52,7 @@ interface IPassDirs extends IStorage
     public function mkDir(string $key, bool $recursive = false): bool;
 
     /**
-     * Remove subdir
+     * Remove subdirectory
      * @param string $key
      * @param bool $recursive
      * @throws StorageException
@@ -91,7 +92,7 @@ interface IPassDirs extends IStorage
      * null if not exists or cannot get that info
      * @param string $key
      * @throws StorageException
-     * @return int|null
+     * @return DateTimeInterface|null
      */
-    public function created(string $key): ?int;
+    public function created(string $key): ?DateTimeInterface;
 }

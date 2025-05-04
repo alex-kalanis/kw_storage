@@ -23,7 +23,7 @@ class Factory
     use TLang;
 
     /** @var array<string|int, class-string> */
-    protected $targetMap = [
+    protected array $targetMap = [
         10 => Target\Memory::class,
         20 => Target\Volume::class,
         22 => Target\VolumeTargetFlat::class,
@@ -57,11 +57,11 @@ class Factory
             if ($params instanceof IStorage) {
                 return $params;
 
-            } elseif ($params instanceof Interfaces\IKey) {
+            } elseif ($params instanceof Interfaces\Target\IKey) {
                 $key = $params;
                 $target = $this->targetByKey($key);
 
-            } elseif ($params instanceof Interfaces\ITarget) {
+            } elseif ($params instanceof Interfaces\Target\ITarget) {
                 $target = $params;
                 $key = new Key\DefaultKey();
             }
@@ -83,7 +83,7 @@ class Factory
         // int, bool, etc. -> exception
 
         if ($key && $target) {
-            if ($target instanceof Interfaces\ITargetVolume) {
+            if ($target instanceof Interfaces\Target\ITargetVolume) {
                 return new Storage\StorageDirs($key, $target);
             }
             return new Storage\Storage($key, $target);
@@ -92,12 +92,12 @@ class Factory
     }
 
     /**
-     * @param Interfaces\IKey $key
+     * @param Interfaces\Target\IKey $key
      * @param array<string|int, string|int|float|object|bool|array<string|int|float|object>> $params
      * @throws StorageException
-     * @return Interfaces\ITarget
+     * @return Interfaces\Target\ITarget
      */
-    protected function targetByKey(Interfaces\IKey $key, array $params = []): Interfaces\ITarget
+    protected function targetByKey(Interfaces\Target\IKey $key, array $params = []): Interfaces\Target\ITarget
     {
         try {
             return $this->whichTarget($params);
@@ -122,13 +122,13 @@ class Factory
     /**
      * @param array<string|int, string|int|float|object|bool|array<string|int|float|object>> $params
      * @throws StorageException
-     * @return Interfaces\IKey
+     * @return Interfaces\Target\IKey
      */
-    protected function whichKey(array $params): Interfaces\IKey
+    protected function whichKey(array $params): Interfaces\Target\IKey
     {
         if (isset($params['storage_key'])) {
             if (is_object($params['storage_key'])) {
-                if ($params['storage_key'] instanceof Interfaces\IKey) {
+                if ($params['storage_key'] instanceof Interfaces\Target\IKey) {
                     return $params['storage_key'];
                 }
                 throw new StorageException($this->getStLang()->stConfigurationUnavailable());
@@ -151,13 +151,13 @@ class Factory
     /**
      * @param array<string|int, string|int|float|object|bool|array<string|int|float|object>> $params
      * @throws StorageException
-     * @return Interfaces\ITarget
+     * @return Interfaces\Target\ITarget
      */
-    protected function whichTarget(array $params): Interfaces\ITarget
+    protected function whichTarget(array $params): Interfaces\Target\ITarget
     {
         if (isset($params['storage_target'])) {
             if (is_object($params['storage_target'])) {
-                if ($params['storage_target'] instanceof Interfaces\ITarget) {
+                if ($params['storage_target'] instanceof Interfaces\Target\ITarget) {
                     return $params['storage_target'];
                 }
                 throw new StorageException($this->getStLang()->stConfigurationUnavailable());
@@ -170,7 +170,7 @@ class Factory
                     } catch (ReflectionException $ex) {
                         throw new StorageException($ex->getMessage(), $ex->getCode(), $ex);
                     }
-                    if ($class instanceof Interfaces\ITarget) {
+                    if ($class instanceof Interfaces\Target\ITarget) {
                         return $class;
                     } else {
                         throw new StorageException($this->getStLang()->stConfigurationUnavailable());

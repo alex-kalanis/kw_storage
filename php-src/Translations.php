@@ -22,42 +22,6 @@ class Translations implements IStTranslations
         return 'Cannot read file';
     }
 
-    /**
-     * @return string
-     * @codeCoverageIgnore VolumeStream
-     */
-    public function stCannotOpenFile(): string
-    {
-        return 'Cannot open file';
-    }
-
-    /**
-     * @return string
-     * @codeCoverageIgnore VolumeStream
-     */
-    public function stCannotSaveFile(): string
-    {
-        return 'Cannot save file';
-    }
-
-    /**
-     * @return string
-     * @codeCoverageIgnore VolumeStream
-     */
-    public function stCannotSeekFile(): string
-    {
-        return 'Cannot seek in file';
-    }
-
-    /**
-     * @return string
-     * @codeCoverageIgnore VolumeStream
-     */
-    public function stCannotCloseFile(): string
-    {
-        return 'Cannot close opened file';
-    }
-
     public function stStorageNotInitialized(): string
     {
         return 'Storage not initialized';

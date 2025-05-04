@@ -39,7 +39,7 @@ class Factory
             return null;
         }
 
-        if ($storage instanceof Interfaces\ITargetVolume) {
+        if ($storage instanceof Interfaces\Target\ITargetVolume) {
             $publicStorage = new StorageDirs(
                 $this->keyFactory->getKey($storage),
                 $storage

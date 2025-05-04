@@ -3,7 +3,7 @@
 namespace kalanis\kw_storage\Storage\Key;
 
 
-use kalanis\kw_storage\Interfaces\IKey;
+use kalanis\kw_storage\Interfaces\Target\IKey;
 
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace AccessTests;
+namespace tests\AccessTests;
 
 
-use CommonTestClass;
+use tests\CommonTestClass;
 use kalanis\kw_storage\Interfaces;
 
 
@@ -20,26 +20,6 @@ class XStLang implements Interfaces\IStTranslations
     }
 
     public function stCannotReadFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotOpenFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotSaveFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotSeekFile(): string
-    {
-        return 'mock';
-    }
-
-    public function stCannotCloseFile(): string
     {
         return 'mock';
     }
