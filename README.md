@@ -68,6 +68,55 @@ But the interfaces in this package make them all equal in terms of usage. So...
 
 5.) Just use inside your app.
 
+```php
+// DI-like
+return function (array $params): \kalanis\kw_storage\Interfaces\IStorage {
+    $storage = (new \kalanis\kw_storage\Storage(
+        new \kalanis\kw_storage\Storage\Factory()) // here can be changed to select different storage
+    );
+    $storage->init($params);
+    return $storage->getStorage();
+}
+```
+
+```php
+// Classes
+class Counter
+{
+    protected const string MY_KEY = 'my_key';
+
+    public function __construct(
+        // ...
+        protected readonly \kalanis\kw_storage\Interfaces\IStorage $storage,
+        // ...
+    ) {
+    }
+
+    public function __destruct()
+    {
+        $this->storage->remove(static::MY_KEY);
+    }
+
+    public function clear(): bool
+    {
+        return $this->storage->write(static::MY_KEY, '0');
+    }
+
+    public function increment(): bool
+    {
+        return $this->storage->increment(static::MY_KEY);
+    }
+
+    public function get(): int
+    {
+        try {
+            return intval($this->storage->read(static::MY_KEY));
+        } catch (\kalanis\kw_storage\StorageException $ex) {
+            return 0;
+        }
+    }
+}
+```
 
 #### Notes
 
